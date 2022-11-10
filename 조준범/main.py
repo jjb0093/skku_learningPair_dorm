@@ -1,3 +1,3 @@
-import weather
+from 조준범 import weather as w
 
-print(weather.getWeather("Seoul"))
+print(w.getTodayWeather("Seoul"))

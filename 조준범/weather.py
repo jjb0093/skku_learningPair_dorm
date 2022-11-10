@@ -51,16 +51,15 @@ def getWeather(loc):
 
         details = {}
         details["dayTime"] = str(data[1][1][5][3].text) + '-' + str(data[1][1][5][4].text)
-        if(numOfRows == 12):
-            details["sky"] = data[1][1][5 + count][5].text
-            details["tmp"] = data[1][1][0 + count][5].text
-            details["reh"] = data[1][1][10 + count][5].text
-            details["pop"] = data[1][1][7 + count][5].text
+        details["sky"] = data[1][1][5 + count][5].text
+        details["tmp"] = data[1][1][0 + count][5].text
+        details["reh"] = data[1][1][10 + count][5].text
+        details["pop"] = data[1][1][7 + count][5].text
 
         pageNum += 1
         if (nowHour == 23): nowHour = 0
         else: nowHour += 1
-        if(nowHour == 6 or nowHour == 15): count += 1
+        if(nowHour == 7 or nowHour == 16): count += 1
 
         weatherDetails.append(details)
 
