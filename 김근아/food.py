@@ -62,9 +62,12 @@ class MyApp(QMainWindow):
         self.setGeometry(300, 300, 800, 600)
         self.show()
 
-
-
 if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = MyApp()
+    sys.exit(app.exec_())
+
+def show():
     app = QApplication(sys.argv)
     ex = MyApp()
     sys.exit(app.exec_())
