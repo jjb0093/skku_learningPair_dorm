@@ -1,4 +1,5 @@
-from 조준범 import weather as w
+from 김근아 import food, post2
+from 천세민 import weather
 
-#print(w.getTodayWeather("Seoul"))
-print(w.getNowWeather("Seoul"))
+#post2.show()
+weather.show()
