@@ -30,7 +30,7 @@ class MyApp(QWidget):
         foodpage.addStretch(1)
         foodpage.addWidget(QLabel("식단"))
         foodpage.addStretch(3)
-        foodpage.addWidget(boximage)
+        foodpage.addWidget(soojeoimage)
         foodpage.addStretch(4)
 
         postandfood = QHBoxLayout()
