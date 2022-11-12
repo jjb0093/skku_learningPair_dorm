@@ -53,9 +53,17 @@ class MyApp(QWidget):
         self.noticeSeoulHead = QLabel("인문사회과학캠퍼스\n \n 공지사항")
         self.noticeSuwonHead = QLabel("자연과학캠퍼스\n \n 공지사항")
 
+        self.radio1 = QRadioButton('인사캠')
+        self.radio2 = QRadioButton('자과캠')
+        self.radio1.setChecked(True)
+
+        radiobox = QVBoxLayout()
+        radiobox.addWidget(self.radio1)
+        radiobox.addWidget(self.radio2)
+
         notice = QGridLayout()
         notice.addWidget(self.noticeHead(), 0, 0)
-        notice.addWidget(self.noticechoose(), 0, 1)
+        notice.addWidget(radiobox(), 0, 1)
         notice.addWidget(self.noticeBody(), 1, 0)
 
         allgrid = QHBoxLayout()
@@ -68,19 +76,7 @@ class MyApp(QWidget):
         self.setGeometry(300, 100, 800, 600)
         self.show()
 
-    def noticechoose(self):
-        groupbox = QGroupBox('캠퍼스 선택')
 
-        self.radio1 = QRadioButton('인사캠')
-        self.radio2 = QRadioButton('자과캠')
-        self.radio1.setChecked(True)
-
-        vbox = QVBoxLayout()
-        vbox.addWidget(self.radio1)
-        vbox.addWidget(self.radio2)
-        groupbox.setLayout(vbox)
-
-        return groupbox
 
     def noticeHead(self):
         noticehead = QLabel()
