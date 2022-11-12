@@ -1,8 +1,9 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QTextBrowser, QLabel, QMainWindow, QAction, qApp, QMainWindow
+from PyQt5.QtWidgets import QApplication, QWidget, QTextBrowser, QLabel, QAction, qApp, QPushButton
 from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtCore import Qt, QSize
 
-class MyApp(QMainWindow):
+class MyApp(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -48,15 +49,15 @@ class MyApp(QMainWindow):
         font3.setBold(True)
         lb3.setFont(font3)
 
-        exitAction = QAction(QIcon('back.png'), 'Exit', self)
-        exitAction.setShortcut('Ctrl+Q')
-        exitAction.setStatusTip('Exit application')
-        exitAction.triggered.connect(qApp.quit)
+        pixmap = QPixmap('back.png')
+        pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
 
-        self.statusBar()
+        icon = QIcon()
+        icon.addPixmap(pixmap)
 
-        self.toolbar = self.addToolBar('Exit')
-        self.toolbar.addAction(exitAction)
+        button = QPushButton(self)
+        button.setIcon(icon)
+        button.setIconSize(QSize(30, 30))
 
         self.setWindowTitle('FOOD')
         self.setGeometry(300, 300, 800, 600)
