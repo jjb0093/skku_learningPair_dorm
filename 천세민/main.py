@@ -75,6 +75,8 @@ class MyApp(QWidget):
         allgrid.addLayout(notice)
         allgrid.addLayout(rightgrid)
 
+        self.setLayout(allgrid)
+
         self.setWindowTitle('Main')
         self.setGeometry(300, 100, 800, 600)
         self.show()
