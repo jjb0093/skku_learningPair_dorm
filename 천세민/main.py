@@ -11,10 +11,13 @@ class MyApp(QWidget):
         self.initUI()
 
     def initUI(self):
-        pixmap1 = QPixmap('box.png')
-
+        pixmap1 = QPixmap('box.png') # 박스 아이콘 @ 택배조회 칸
         boximage = QLabel()
         boximage.setPixmap(pixmap1)
+
+        pixmap2 = QPixmap('food.png') # 수저 아이콘 @ 식단조회 칸
+        soojeoimage = QLabel()
+        soojeoimage.setPixmap(pixmap2)
 
         postpage = QVBoxLayout()
         postpage.addStretch(1)
@@ -30,9 +33,9 @@ class MyApp(QWidget):
         foodpage.addWidget(boximage)
         foodpage.addStretch(4)
 
-        postandfood = QGridLayout()
-        postandfood.addChildLayout(postpage, 0, 0)
-        postandfood.addChildLayout(foodpage, 0, 1)
+        postandfood = QHBoxLayout()
+        postandfood.addLayout(postpage)
+        postandfood.addLayout(foodpage)
 
         weatherpage = QVBoxLayout()
         weatherpage.addStretch(1)
@@ -41,24 +44,36 @@ class MyApp(QWidget):
         weatherpage.addWidget(boximage)
         weatherpage.addStretch(3)
 
-        rightgrid = QGridLayout()
-        rightgrid.addChildLayout(weatherpage, 0, 0)
-        rightgrid.addChildLayout(postandfood, 1, 0)
+        rightgrid = QVBoxLayout()
+        rightgrid.addChildLayout(weatherpage)
+        rightgrid.addChildLayout(postandfood)
 
-        noticeSeoul = QGridLayout()
-        noticeSeoul.addWidget(QLabel("인문사회과학캠퍼스"))
-        noticeSeoul.addWidget(QLabel("기숙사 공지사항"))
+        noticeSeoulBody = QTextBrowser()
+        noticeSuwonBody = QTextBrowser()
 
-        noticeSuwon = QVBoxLayout()
-        noticeSuwon.addStretch(1)
-        noticeSuwon.addWidget()
+        btnSeoul = QRadioButton("인사캠")
+        btnSuwon = QRadioButton("자과캠")
+        btnSeoul.setChecked(True)
 
-        notice = QVBoxLayout()
+        if btnSeoul.isChecked():
+            notice = QGridLayout()
+            notice.addWidget(QLabel("인문사회과학캠퍼스"), 0, 0)
+            notice.addWidget(QLabel("기숙사 공지사항"), 1, 0)
+            notice.addWidget(btnSeoul, 0, 1)
+            notice.addWidget(btnSuwon, 1, 1)
+            notice.addWidget(noticeSeoulBody, 2, 0)
 
+        if btnSuwon.isChecked():
+            notice = QGridLayout()
+            notice.addWidget(QLabel("자연과학캠퍼스"), 0, 0)
+            notice.addWidget(QLabel("기숙사 공지사항"), 1, 0)
+            notice.addWidget(btnSeoul, 0, 1)
+            notice.addWidget(btnSuwon, 1, 1)
+            notice.addWidget(noticeSuwonBody)
 
-        allgrid = QGridLayout()
-        allgrid.addChildLayout(0, 0)
-        allgrid.addChildLayout(rightgrid, 0, 1)
+        allgrid = QHBoxLayout()
+        allgrid.addLayout(notice)
+        allgrid.addLayout(rightgrid)
 
         self.setWindowTitle('Main')
         self.setGeometry(300, 100, 800, 600)
