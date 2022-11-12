@@ -1,10 +1,10 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import QDateTime
 
 
 class MyApp(QWidget):
+
 
     def __init__(self):
         super().__init__()
@@ -48,28 +48,15 @@ class MyApp(QWidget):
         rightgrid.addChildLayout(weatherpage)
         rightgrid.addChildLayout(postandfood)
 
-        noticeSeoulBody = QTextBrowser()
-        noticeSuwonBody = QTextBrowser()
+        self.noticeSeoulBody = QTextBrowser()
+        self.noticeSuwonBody = QTextBrowser()
+        self.noticeSeoulHead = QLabel("인문사회과학캠퍼스\n \n 공지사항")
+        self.noticeSuwonHead = QLabel("자연과학캠퍼스\n \n 공지사항")
 
-        btnSeoul = QRadioButton("인사캠")
-        btnSuwon = QRadioButton("자과캠")
-        btnSeoul.setChecked(True)
-
-        if btnSeoul.isChecked():
-            notice = QGridLayout()
-            notice.addWidget(QLabel("인문사회과학캠퍼스"), 0, 0)
-            notice.addWidget(QLabel("기숙사 공지사항"), 1, 0)
-            notice.addWidget(btnSeoul, 0, 1)
-            notice.addWidget(btnSuwon, 1, 1)
-            notice.addWidget(noticeSeoulBody, 2, 0)
-
-        if btnSuwon.isChecked():
-            notice = QGridLayout()
-            notice.addWidget(QLabel("자연과학캠퍼스"), 0, 0)
-            notice.addWidget(QLabel("기숙사 공지사항"), 1, 0)
-            notice.addWidget(btnSeoul, 0, 1)
-            notice.addWidget(btnSuwon, 1, 1)
-            notice.addWidget(noticeSuwonBody)
+        notice = QGridLayout()
+        notice.addWidget(self.noticeHead(), 0, 0)
+        notice.addWidget(self.noticechoose(), 0, 1)
+        notice.addWidget(self.noticeBody(), 1, 0)
 
         allgrid = QHBoxLayout()
         allgrid.addLayout(notice)
@@ -80,6 +67,38 @@ class MyApp(QWidget):
         self.setWindowTitle('Main')
         self.setGeometry(300, 100, 800, 600)
         self.show()
+
+    def noticechoose(self):
+        groupbox = QGroupBox('캠퍼스 선택')
+
+        self.radio1 = QRadioButton('인사캠')
+        self.radio2 = QRadioButton('자과캠')
+        self.radio1.setChecked(True)
+
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.radio1)
+        vbox.addWidget(self.radio2)
+        groupbox.setLayout(vbox)
+
+        return groupbox
+
+    def noticeHead(self):
+        noticehead = QLabel()
+        if self.radio1.isChecked():
+            noticebody = self.noticeSeoulBody
+        elif self.radio2.isChecked():
+            noticebody = self.noticeSuwonBody
+
+        return noticehead
+    def noticeBody(self):
+        noticebody = QTextBrowser()
+        if self.radio1.isChecked():
+            noticebody = self.noticeSeoulBody
+        elif self.radio2.isChecked():
+            noticebody = self.noticeSuwonBody
+
+        return noticebody
+
 
 
 if __name__ == '__main__':
