@@ -85,9 +85,9 @@ class MyApp(QWidget):
     def noticeHead(self):
         noticehead = QLabel()
         if self.radio1.isChecked():
-            noticebody = self.noticeSeoulBody
+            noticehead = self.noticeSeoulBody
         elif self.radio2.isChecked():
-            noticebody = self.noticeSuwonBody
+            noticehead = self.noticeSuwonBody
 
         return noticehead
     def noticeBody(self):
