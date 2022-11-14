@@ -7,17 +7,16 @@ def getDelivery(code, invoice):
 
     url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=7r7oaKc5c22PTh3FgFIB6Q&t_code='+ str(code) + '&t_invoice=' + str(invoice)
     data = json.loads(requests.get(url).text)
-    print(url)
 
     info = {}
 
     info["complete"] = data['complete']
-    info["invoice_no"] = data['invoiceNo']
+    #info["invoice_no"] = data['invoiceNo']
     info["item_name"] = data['itemName']
-    info["receiver_addr"] = data['receiverAddr']
-    info["receiver_name"] = data['receiverName']
-    info["sender_name"] = data['senderName']
-    info["last_detail"] = data['lastDetail']
+    #info["receiver_addr"] = data['receiverAddr']
+    #info["receiver_name"] = data['receiverName']
+    #info["sender_name"] = data['senderName']
+    #info["last_detail"] = data['lastDetail']
     trackingDetails_count = len(data['trackingDetails'])
 
     trackingDetails = []
@@ -25,7 +24,7 @@ def getDelivery(code, invoice):
         details = {}
         tracking = data['trackingDetails'][i]
         details["trans_kind"] = tracking['kind']
-        details["trans_telno"] = tracking['telno']
+        #details["trans_telno"] = tracking['telno']
         details["timeString"] = tracking['timeString']
         details["trans_where"] = tracking['where']
         trackingDetails.append(details)

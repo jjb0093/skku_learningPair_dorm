@@ -55,7 +55,10 @@ class MyApp(QWidget):
     def btn1_clicked(self):
         index = MyApp.companyList.index(self.cb.currentText())
         result = delivery.getDelivery(MyApp.companyNum[index], self.qle2.text())
-        print(result)
+        self.tb.setText("<span style='font-size: 20px; font-weight: 600'>" + str(result[0]['item_name']) + " </span><span style='font-size: 20px; font-weight: 600; color: red;'>(" + ("배송 완료" if(result[0]['complete'] == True) else "배송 중") + ")</span><hr>")
+        for i in range(len(result[1])):
+            text = result[1][i]
+            self.tb.append("<p style='font-size: 20px'>" + str(text['timeString']) + " / " + str(text['trans_where']) + " / " + str(text['trans_kind']).replace("\n", "") + "</p>")
 
 if __name__ == '__main__':
    app = QApplication(sys.argv)
