@@ -11,23 +11,23 @@ class MyApp(QWidget):
         self.initUI()
 
     def initUI(self):
-        tb1 = QTextBrowser(self)
-        tb1.setAcceptRichText(True)
-        tb1.setOpenExternalLinks(True)
-        tb1.move(50, 130)
-        tb1.resize(200, 400)
+        self.tb1 = QTextBrowser(self)
+        self.tb1.setAcceptRichText(True)
+        self.tb1.setOpenExternalLinks(True)
+        self.tb1.move(50, 130)
+        self.tb1.resize(200, 400)
 
-        tb2 = QTextBrowser(self)
-        tb2.setAcceptRichText(True)
-        tb2.setOpenExternalLinks(True)
-        tb2.move(300, 130)
-        tb2.resize(200, 400)
+        self.tb2 = QTextBrowser(self)
+        self.tb2.setAcceptRichText(True)
+        self.tb2.setOpenExternalLinks(True)
+        self.tb2.move(300, 130)
+        self.tb2.resize(200, 400)
 
-        tb3 = QTextBrowser(self)
-        tb3.setAcceptRichText(True)
-        tb3.setOpenExternalLinks(True)
-        tb3.move(550, 130)
-        tb3.resize(200, 400)
+        self.tb3 = QTextBrowser(self)
+        self.tb3.setAcceptRichText(True)
+        self.tb3.setOpenExternalLinks(True)
+        self.tb3.move(550, 130)
+        self.tb3.resize(200, 400)
 
         lb1 = QLabel('아침', self)
         lb1.move(135, 100)
@@ -60,7 +60,19 @@ class MyApp(QWidget):
         button.setIcon(icon)
         button.setIconSize(QSize(30, 30))
 
-        result = cafeteria.getFood("Suwon")
+        result = cafeteria.getFood("Seoul")
+        food = []
+        for i in range(len(result)): food.append(result[i])
+        for i in range(len(food[0].keys())):
+            self.tb1.append("<span style='font-size: 20px; font-weight: 800'>" + list(food[0].keys())[i] + "</span>")
+            self.tb1.append("<span style='font-size: 16px'>" + str(list(food[0].values())[i]).replace(',', "\n") + "</span>")
+            self.tb1.append("\n")
+        for i in range(len(food[1].keys())):
+            self.tb2.append("<span style='font-size: 20px; font-weight: 800'>" + list(food[1].keys())[i] + "</span>")
+            self.tb2.append("<span style='font-size: 16px'>" + str(list(food[1].values())[i]).replace(',', "\n") + "</span><br><br>")
+        for i in range(len(food[2].keys())):
+            self.tb3.append("<span style='font-size: 20px; font-weight: 800'>" + list(food[2].keys())[i] + "</span>")
+            self.tb3.append("<span style='font-size: 16px'>" + str(list(food[2].values())[i]).replace(',', "\n") + "</span><br><br>")
 
         self.setWindowTitle('FOOD')
         self.setGeometry(300, 300, 800, 600)
