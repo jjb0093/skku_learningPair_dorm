@@ -2,11 +2,12 @@ import requests
 import json
 
 def getDelivery(code, invoice):
-    code = "04"
-    invoice = "566223490280"
+    #code = "04"
+    #invoice = "566223490280"
 
     url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=7r7oaKc5c22PTh3FgFIB6Q&t_code='+ str(code) + '&t_invoice=' + str(invoice)
     data = json.loads(requests.get(url).text)
+    print(url)
 
     info = {}
 
@@ -25,7 +26,7 @@ def getDelivery(code, invoice):
         tracking = data['trackingDetails'][i]
         details["trans_kind"] = tracking['kind']
         details["trans_telno"] = tracking['telno']
-        details["trans_time"] = tracking['time']
+        details["timeString"] = tracking['timeString']
         details["trans_where"] = tracking['where']
         trackingDetails.append(details)
 

@@ -2,8 +2,12 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt, QSize
+from modules import delivery
 
 class MyApp(QWidget):
+
+    companyList = ['CJ 대한통운', '우체국택배', '한진택배', '롯데택배', '로젠택배', '경동택배', 'CVSnet 편의점택배(GS25)', 'CU 편의점택배']
+    companyNum = ['04', '01', '05', '08', '06', '23', '24', '46']
 
     def __init__(self):
         super().__init__()
@@ -11,14 +15,8 @@ class MyApp(QWidget):
 
     def initUI(self):
         self.cb = QComboBox(self)
-        self.cb.addItem('CJ대한통운')
-        self.cb.addItem('우체국택배')
-        self.cb.addItem('한진택배')
-        self.cb.addItem('롯데택배')
-        self.cb.addItem('로젠택배')
-        self.cb.addItem('홈픽')
-        self.cb.addItem('CVSnet 편의점택배(GS25)')
-        self.cb.addItem('CU 편의점택배')
+        for i in range(len(MyApp.companyList)):
+            self.cb.addItem(MyApp.companyList[i])
         self.cb.move(30,100)
         self.cb.resize(300,40)
 
@@ -53,13 +51,11 @@ class MyApp(QWidget):
         self.setWindowTitle('POST')
         self.setGeometry(300, 300, 800, 600)
         self.show()
+
     def btn1_clicked(self):
-        #print(self.cb)
-        one_text = self.cb.currentText()
-        two_text = self.qle2.text()
-        QMessageBox.about(self, "Message", two_text)
-
-
+        index = MyApp.companyList.index(self.cb.currentText())
+        result = delivery.getDelivery(MyApp.companyNum[index], self.qle2.text())
+        print(result)
 
 if __name__ == '__main__':
    app = QApplication(sys.argv)
