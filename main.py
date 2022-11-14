@@ -3,4 +3,4 @@ from 천세민 import weather, main
 
 #post2.show()
 #weather.show()
-main.show()
+post2.show()
