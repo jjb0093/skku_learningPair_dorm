@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QTextBrowser, QLabel, QAction, qApp, QPushButton
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt, QSize
+from modules import cafeteria
 
 class MyApp(QWidget):
 
@@ -58,6 +59,8 @@ class MyApp(QWidget):
         button = QPushButton(self)
         button.setIcon(icon)
         button.setIconSize(QSize(30, 30))
+
+        result = cafeteria.getFood("Suwon")
 
         self.setWindowTitle('FOOD')
         self.setGeometry(300, 300, 800, 600)
