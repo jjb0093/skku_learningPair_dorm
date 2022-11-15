@@ -64,18 +64,8 @@ class MyApp(QWidget):
         self.noticeSuwonbody = QVBoxLayout()
         self.noticeSuwondata = QTextBrowser() # 여기에 수원 날씨 관련 자료 넣기
 
-        result_notice = dorm.getDorm(MyApp.campus, 2)
-        print(len(result_notice[1]) - int(result_notice[0]))
-
         self.noticebody = QTextBrowser()
-        self.noticebody.setText("")
-
-        url = {"Seoul":"https://dorm.skku.edu/dorm_seoul/notice/notice_all.jsp"}
-        for i in range(int(result_notice[0])):
-            self.noticebody.append("<a href='" + url[MyApp.campus] + result_notice[1][i][5] + "'><p style='color: red;'>" + result_notice[1][i][2] + "</p></a>")
-            print("<a href='" + url[MyApp.campus] + result_notice[1][i][5] + "'><p style='color: red;'>" + result_notice[1][i][2] + "</p></a>")
-        for i in range(len(result_notice[1]) - int(result_notice[0])):
-            self.noticebody.append("<p style='color: black;'>" + result_notice[1][i+2][2] + "</p>")
+        MyApp.showNotice(self)
 
         self.radio1 = QRadioButton('인사캠')
         self.radio2 = QRadioButton('자과캠')
@@ -107,23 +97,40 @@ class MyApp(QWidget):
         self.setGeometry(300, 100, 800, 600)
         self.show()
 
+    def showNotice(self):
+        result_notice = dorm.getDorm(MyApp.campus, 2)
+        print(len(result_notice[1]) - int(result_notice[0]))
+
+        self.noticebody.setText("")
+        url = {"Seoul": "https://dorm.skku.edu/dorm_seoul/notice/notice_all.jsp",
+               "Suwon": "https://dorm.skku.edu/dorm_suwon/notice/notice_all.jsp"}
+
+        for i in range(int(result_notice[0])):
+            self.noticebody.append(
+                "<p style='color: red;' onclick=window.open('" + url[MyApp.campus] + result_notice[1][i][5] + "');>" +
+                result_notice[1][i][2] + "</p>")
+        for i in range(len(result_notice[1]) - int(result_notice[0])):
+            self.noticebody.append("<p style='color: black;'>" + result_notice[1][i + 2][2] + "</p>")
+
     def radio1_clicked(self, enabled):
         if enabled:
             self.noticehead.setText('인문사회과학캠퍼스\n \n공지사항')
             self.noticebody.setLayout(self.noticeSeoulbody)
-            campus = "Seoul"
+            MyApp.campus = "Seoul"
             f = open("init.txt", 'w')
             f.write("Seoul")
             f.close
+            MyApp.showNotice(self)
 
     def radio2_clicked(self, enabled):
         if enabled:
             self.noticehead.setText('자연과학캠퍼스\n \n공지사항')
             self.noticebody.setLayout(self.noticeSuwonbody)
-            campus = "Suwon"
+            MyApp.campus = "Suwon"
             f = open("init.txt", 'w')
             f.write("Suwon")
             f.close
+            MyApp.showNotice(self)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
