@@ -16,7 +16,6 @@ class MyApp(QWidget):
 
     def initUI(self):
         result = w.getWeather(MyApp.campus)
-        print(result)
 
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
