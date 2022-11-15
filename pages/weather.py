@@ -54,8 +54,10 @@ class MyApp(QWidget):
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
         grid.addWidget(QLabel("온도: "), 0, 0)
-        grid.addWidget(QLabel("습도: "), 1, 0)
-        grid.addWidget(QLabel("강수확률: "), 2, 0)
+        grid.addWidget(QLabel(), 1, 0)
+        grid.addWidget(QLabel("습도: "), 2, 0)
+        grid.addWidget(QLabel(), 3, 0)
+        grid.addWidget(QLabel("강수확률: "), 4, 0)
 
         sky_now = int(result[0]['sky'])
         pty_now = int(result[0]['pty'])
@@ -68,22 +70,29 @@ class MyApp(QWidget):
             elif (pty_now == 2 or pty_now == 3): state = " 눈"
 
         grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 0, 1) # 현재 온도 자료
-        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 1, 1) # 현재 습도 자료
-        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 2, 1) # 현재 강수확률 자료
+        grid.addWidget(QLabel(), 1, 1)
+        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 2, 1) # 현재 습도 자료
+        grid.addWidget(QLabel(), 3, 1)
+        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 4, 1) # 현재 강수확률 자료
+
+        gridbox = QVBoxLayout()
+        gridbox.addStretch(2)
+        gridbox.addLayout(grid)
+        gridbox.addStretch(2)
 
         lbl_img = QLabel()
-        lbl_img.resize(500, 500)
+        lbl_img.resize(350, 350)
 
         cloudpic = QPixmap('images/cloud.png')
-        cloudpic = cloudpic.scaledToWidth(500)
+        cloudpic = cloudpic.scaledToWidth(350)
         rainpic = QPixmap('images/rain.png')
-        rainpic = rainpic.scaledToWidth(500)
+        rainpic = rainpic.scaledToWidth(350)
         snowpic = QPixmap('images/snow.png')
-        snowpic = snowpic.scaledToWidth(500)
+        snowpic = snowpic.scaledToWidth(350)
         sunpic = QPixmap('images/sun.png')
-        sunpic = sunpic.scaledToWidth(500)
+        sunpic = sunpic.scaledToWidth(350)
 
-        if (sky_now == 1): lbl_img.addPixmap(sunpic)
+        if (sky_now == 1): lbl_img.setPixmap(sunpic)
         else:
             if (pty_now == 0):
                 if (sky_now == 3): lbl_img.setPixmap(cloudpic)
@@ -93,8 +102,10 @@ class MyApp(QWidget):
 
 
         hbox = QHBoxLayout() # 온습강 그리드와 날씨 아이콘
+        hbox.addStretch(1)
         hbox.addWidget(lbl_img)
-        hbox.addLayout(grid)
+        hbox.addStretch(1)
+        hbox.addLayout(gridbox)
         hbox.addStretch(3)
 
         vbox = QVBoxLayout() #hbox와 시간별 날씨 표시
