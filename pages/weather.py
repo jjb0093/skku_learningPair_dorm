@@ -34,6 +34,7 @@ class MyApp(QWidget):
             tableWidget.setHorizontalHeaderItem(i, QTableWidgetItem(time.addSecs(3600*i).toString('hh:mm')))
 
         tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         for i in range(1, 7):
             print(result[i]['dayTime'])
