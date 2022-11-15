@@ -25,15 +25,15 @@ class MyApp(QWidget):
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
         tableWidget = QTableWidget() # 표 세팅
+        tableWidget.resize(200,600)
         tableWidget.setRowCount(1)
         tableWidget.setColumnCount(7)
 
         tableWidget.setVerticalHeaderItem(0, QTableWidgetItem('날씨'))
         for i in range(7):
-            tableWidget.setHorizontalHeaderItem(i, QTableWidgetItem(time.addSecs(7200*(i-3)).toString('MM월 dd일 hh:mm')))
+            tableWidget.setHorizontalHeaderItem(i, QTableWidgetItem(time.addSecs(3600*i).toString('hh:mm')))
 
         tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
         for i in range(1, 7):
             print(result[i]['dayTime'])
@@ -44,9 +44,9 @@ class MyApp(QWidget):
         grid.addWidget(QLabel("습도: "), 1, 0)
         grid.addWidget(QLabel("강수량: "), 2, 0)
 
-        grid.addWidget(QTextBrowser(str(result[0]['tmp'])), 0, 1) # 현재 온도 자료
-        grid.addWidget(QTextBrowser(str(result[0]['reh'])), 1, 1) # 현재 습도 자료
-        grid.addWidget(QTextBrowser(str(result[0]['pop'])), 2, 1) # 현재 강수량 자료
+        grid.addWidget(QLabel(str(result[0]['tmp'])), 0, 1) # 현재 온도 자료
+        grid.addWidget(QLabel(str(result[0]['reh'])), 1, 1) # 현재 습도 자료
+        grid.addWidget(QLabel(str(result[0]['pop'])), 2, 1) # 현재 강수량 자료
 
         hbox = QHBoxLayout() # 온습강 그리드와 날씨 아이콘
         hbox.addStretch(1)

@@ -32,7 +32,7 @@ class MyApp(QWidget):
         # tableWidget.setItem(i, j, QTableWidgetItem()) - 여기다가 자료 채워주세용
 
 
-        grid = QGridLayout() # 온,습,강 나타내는 그리드
+        grid = QGridLayout()# 온,습,강 나타내는 그리드
         grid.addWidget(QLabel("온도: "), 0, 0)
         grid.addWidget(QLabel("습도: "), 1, 0)
         grid.addWidget(QLabel("강수량: "), 2, 0)
@@ -41,7 +41,7 @@ class MyApp(QWidget):
         grid.addWidget(QLabel(), 1, 1) # 현재 습도 자료
         grid.addWidget(QLabel(), 2, 1) # 현재 강수량 자료
 
-        hbox = QHBoxLayout() # 온습강 그리드와 날씨 아이콘
+        hbox = QHBoxLayout()# 온습강 그리드와 날씨 아이콘
         hbox.addStretch(1)
         hbox.addLayout(grid)
         hbox.addWidget(lbl_img)
