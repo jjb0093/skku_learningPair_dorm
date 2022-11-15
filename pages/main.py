@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import dorm, weather
+from pages import delivery
 
 class MyApp(QWidget):
     f = open("init.txt", 'r')
@@ -15,12 +16,14 @@ class MyApp(QWidget):
 
     def initUI(self):
         pixmap1 = QPixmap('images/box.png') # 박스 아이콘 @ 택배조회 칸
-        pixmap1 = pixmap1.scaled(150, 150, Qt.IgnoreAspectRatio)
+        pixmap1 = pixmap1.scaled(200, 200, Qt.IgnoreAspectRatio)
         boximage = QLabel()
         boximage.setPixmap(pixmap1)
+        self.page_delivery = delivery.MyApp()
+        boximage.mousePressEvent = self.page_delivery.show
 
         pixmap2 = QPixmap('images/food.png') # 수저 아이콘 @ 식단조회 칸
-        pixmap2 = pixmap2.scaled(150, 150, Qt.IgnoreAspectRatio)
+        pixmap2 = pixmap2.scaled(200, 200, Qt.IgnoreAspectRatio)
         soojeoimage = QLabel()
         soojeoimage.setPixmap(pixmap2)
 
