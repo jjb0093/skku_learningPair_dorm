@@ -51,9 +51,10 @@ class MyApp(QWidget):
                 elif(pty == 1 or pty == 4): tableWidget.setItem(0, i, QTableWidgetItem("비"))
                 elif(pty == 2 or pty == 3): tableWidget.setItem(0, i, QTableWidgetItem("눈"))
 
+        signs = ["°C", "%", "%"]
         for i in range(1, 4):
             for k in range(6):
-                tableWidget.setItem(i, k, QTableWidgetItem(str(list(result[k+1].values())[i+1])))
+                tableWidget.setItem(i, k, QTableWidgetItem(str(list(result[k+1].values())[i+1])+signs[i-1]))
 
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
@@ -61,13 +62,23 @@ class MyApp(QWidget):
         grid.addWidget(QLabel(), 1, 0)
         grid.addWidget(QLabel("습도: "), 2, 0)
         grid.addWidget(QLabel(), 3, 0)
-        grid.addWidget(QLabel("강수량: "), 4, 0)
+        grid.addWidget(QLabel("강수확률: "), 4, 0)
+
+        sky_now = int(result[0]['sky'])
+        pty_now = int(result[0]['pty'])
+        if (sky_now == 1): state = "맑음"
+        else:
+            if (pty_now == 0):
+                if (sky_now == 3): state = "구름많음"
+                elif (sky_now == 4): state = "흐림"
+            elif (pty_now == 1 or pty_now == 4): state = "비"
+            elif (pty_now == 2 or pty_now == 3): state = " 눈"
 
         grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 0, 1) # 현재 온도 자료
         grid.addWidget(QLabel(), 1, 1)
         grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 2, 1) # 현재 습도 자료
         grid.addWidget(QLabel(), 3, 1)
-        grid.addWidget(QLabel(str(result[0]['pop'])+"mm"), 4, 1) # 현재 강수량 자료
+        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 4, 1) # 현재 강수확률 자료
 
         hbox = QHBoxLayout() # 온습강 그리드와 날씨 아이콘
         hbox.addStretch(1)
