@@ -21,7 +21,7 @@ def getWeather(loc):
     baseTime = '2300'
     baseDate = (date.today() - timedelta(1)).strftime("%Y%m%d")
 
-    if(now.hour >= 2 and now.minute > 10):
+    if(now.hour >= 3 and now.minute > 10):
         baseDate = now.strftime("%Y%m%d")
         if((now.hour - 2) % 3 == 0):
             baseTime = str((now - timedelta(hours = 3)).strftime("%H00"))
@@ -29,6 +29,8 @@ def getWeather(loc):
         else:
             baseTime = str((now - timedelta(hours = ((now.hour - 2) % 3))).strftime("%H00"))
             pageNum = int((now.hour - 2) % 3)
+    elif(now.hour == 1): pageNum = 2
+    elif(now.hour == 2): pageNum = 3
 
     nowHour = now.hour
 
@@ -45,6 +47,7 @@ def getWeather(loc):
         url += '&base_time=' + str(baseTime)
         url += '&nx=' + str(nx)
         url += '&ny=' + str(ny)
+        print(url)
 
         response = requests.get(url, verify = False)
         data = elt.fromstring(response.text)

@@ -1,3 +1,3 @@
-from pages import cafeteria, delivery, weather, main
+from pages import page_cafeteria, page_delivery, page_weather, main
 
-main.show()
+page_weather.show()

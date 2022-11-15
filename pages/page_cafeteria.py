@@ -4,10 +4,11 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt, QSize
 from modules import cafeteria
 
-class MyApp(QWidget):
+class Cafeteria(QWidget):
     f = open("init.txt", 'r')
     campus = f.read()
     f.close()
+    print(campus)
 
     def __init__(self):
         super().__init__()
@@ -63,7 +64,7 @@ class MyApp(QWidget):
         button.setIcon(icon)
         button.setIconSize(QSize(30, 30))
 
-        result = cafeteria.getFood(MyApp.campus)
+        result = cafeteria.getFood(Cafeteria.campus)
         food = []
         for i in range(len(result)): food.append(result[i])
         for i in range(len(food[0].keys())):
@@ -81,12 +82,7 @@ class MyApp(QWidget):
         self.setGeometry(300, 300, 800, 600)
         self.show()
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = MyApp()
-    sys.exit(app.exec_())
-
 def show():
     app = QApplication(sys.argv)
-    ex = MyApp()
+    ex = Cafeteria()
     sys.exit(app.exec_())

@@ -4,7 +4,7 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt, QSize
 from modules import delivery
 
-class MyApp(QWidget):
+class Delivery(QWidget):
 
     companyList = ['CJ 대한통운', '우체국택배', '한진택배', '롯데택배', '로젠택배', '경동택배', 'CVSnet 편의점택배(GS25)', 'CU 편의점택배']
     companyNum = ['04', '01', '05', '08', '06', '23', '24', '46']
@@ -15,8 +15,8 @@ class MyApp(QWidget):
 
     def initUI(self):
         self.cb = QComboBox(self)
-        for i in range(len(MyApp.companyList)):
-            self.cb.addItem(MyApp.companyList[i])
+        for i in range(len(Delivery.companyList)):
+            self.cb.addItem(Delivery.companyList[i])
         self.cb.move(30,100)
         self.cb.resize(300,40)
 
@@ -47,25 +47,19 @@ class MyApp(QWidget):
         button.setIcon(icon)
         button.setIconSize(QSize(30, 30))
 
-
         self.setWindowTitle('POST')
         self.setGeometry(300, 300, 800, 600)
         self.show()
 
     def btn1_clicked(self):
-        index = MyApp.companyList.index(self.cb.currentText())
-        result = delivery.getDelivery(MyApp.companyNum[index], self.qle2.text())
+        index = Delivery.companyList.index(self.cb.currentText())
+        result = delivery.getDelivery(Delivery.companyNum[index], self.qle2.text())
         self.tb.setText("<span style='font-size: 20px; font-weight: 600'>" + str(result[0]['item_name']) + " </span><span style='font-size: 20px; font-weight: 600; color: red;'>(" + ("배송 완료" if(result[0]['complete'] == True) else "배송 중") + ")</span><hr>")
         for i in range(len(result[1])):
             text = result[1][i]
             self.tb.append("<p style='font-size: 20px'>" + str(text['timeString']) + " / " + str(text['trans_where']) + " / " + str(text['trans_kind']).replace("\n", "") + "</p>")
 
-if __name__ == '__main__':
-   app = QApplication(sys.argv)
-   ex = MyApp()
-   sys.exit(app.exec_())
-
 def show():
     app = QApplication(sys.argv)
-    ex = MyApp()
+    ex = Delivery()
     sys.exit(app.exec_())

@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import dorm, weather
-from pages import delivery
+from pages import page_delivery, page_weather, page_cafeteria
 
 class MyApp(QWidget):
     f = open("init.txt", 'r')
@@ -19,8 +19,8 @@ class MyApp(QWidget):
         pixmap1 = pixmap1.scaled(200, 200, Qt.IgnoreAspectRatio)
         boximage = QLabel()
         boximage.setPixmap(pixmap1)
-        self.page_delivery = delivery.MyApp()
-        boximage.mousePressEvent = self.page_delivery.show
+        #self.page_delivery = delivery.MyApp()
+        #boximage.mousePressEvent = self.page_delivery.show
 
         pixmap2 = QPixmap('images/food.png') # 수저 아이콘 @ 식단조회 칸
         pixmap2 = pixmap2.scaled(200, 200, Qt.IgnoreAspectRatio)
@@ -29,17 +29,22 @@ class MyApp(QWidget):
 
         postpage = QVBoxLayout()
         postpage.addStretch(1)
-        postpage.addWidget(QPushButton("택배조회"))
+        #postpage.addWidget(QPushButton("택배조회"))
+        btnDelivery = QPushButton("택배조회")
+        postpage.addWidget(btnDelivery)
         postpage.addStretch(3)
         postpage.addWidget(boximage)
         postpage.addStretch(4)
+        btnDelivery.clicked.connect(self.test)
 
         foodpage = QVBoxLayout()
         foodpage.addStretch(1)
-        foodpage.addWidget(QPushButton("식단"))
+        btnFood = QPushButton("식단")
+        foodpage.addWidget(btnFood)
         foodpage.addStretch(3)
         foodpage.addWidget(soojeoimage)
         foodpage.addStretch(4)
+        btnFood.clicked.connect(self.test2)
 
         postandfood = QHBoxLayout()
         postandfood.addLayout(postpage)
@@ -49,10 +54,12 @@ class MyApp(QWidget):
 
         weatherpage = QVBoxLayout()
         weatherpage.addStretch(1)
-        weatherpage.addWidget(QPushButton("날씨"))
+        btnWeather = QPushButton("날씨")
+        weatherpage.addWidget(btnWeather)
         weatherpage.addStretch(3)
         weatherpage.addWidget(weatherdata)
         weatherpage.addStretch(3)
+        btnWeather.clicked.connect(self.test3)
 
         rightgrid = QVBoxLayout()
         rightgrid.addLayout(weatherpage)
@@ -103,6 +110,18 @@ class MyApp(QWidget):
         self.setGeometry(300, 100, 800, 600)
         self.show()
 
+    def test(self):
+        self.second = page_delivery.Delivery()
+        self.second.show()
+
+    def test3(self):
+        self.third = page_weather.Weather()
+        self.third.show()
+
+    def test2(self):
+        self.fourth = page_cafeteria.Cafeteria()
+        self.fourth.show()
+
     def showNotice(self):
         result_notice = dorm.getDorm(MyApp.campus, 2)
 
@@ -112,10 +131,10 @@ class MyApp(QWidget):
 
         for i in range(int(result_notice[0])):
             self.noticebody.append(
-                "<a href=" + url[MyApp.campus] + result_notice[1][i][5] + "><p style='color: red;');>" +
+                "<a href='" + url[MyApp.campus] + result_notice[1][i][5] + "'><p style='color: red;');>" +
                 result_notice[1][i][2] + "</p></a>")
         for i in range(len(result_notice[1]) - int(result_notice[0])):
-            self.noticebody.append("<a href=" + url[MyApp.campus] + result_notice[1][i+2][5] + "><p style='color: black;'>" + result_notice[1][i + 2][2] + "</p></a>")
+            self.noticebody.append("<a href='" + url[MyApp.campus] + result_notice[1][i+2][5] + "'><p style='color: black;'>" + result_notice[1][i + 2][2] + "</p></a>")
 
     def showWeather(self):
         result = weather.getNowWeather(MyApp.campus)

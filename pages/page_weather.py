@@ -5,7 +5,7 @@ from PyQt5.QtCore import QDateTime, QSize, Qt
 from modules import weather as w
 
 
-class MyApp(QWidget):
+class Weather(QWidget):
     f = open("init.txt", 'r')
     campus = f.read()
     f.close()
@@ -15,7 +15,7 @@ class MyApp(QWidget):
         self.initUI()
 
     def initUI(self):
-        result = w.getWeather(MyApp.campus)
+        result = w.getWeather(Weather.campus)
 
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
@@ -131,12 +131,7 @@ class MyApp(QWidget):
         self.setGeometry(300, 100, 800, 600)
         self.show()
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = MyApp()
-    sys.exit(app.exec_())
-
 def show():
     app = QApplication(sys.argv)
-    ex = MyApp()
+    ex = Weather()
     sys.exit(app.exec_())
