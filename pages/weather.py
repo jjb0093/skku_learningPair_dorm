@@ -44,9 +44,9 @@ class MyApp(QWidget):
         grid.addWidget(QLabel("습도: "), 1, 0)
         grid.addWidget(QLabel("강수량: "), 2, 0)
 
-        grid.addWidget(QTextBrowser(), 0, 1) # 현재 온도 자료
-        grid.addWidget(QTextBrowser(), 1, 1) # 현재 습도 자료
-        grid.addWidget(QTextBrowser(), 2, 1) # 현재 강수량 자료
+        grid.addWidget(QTextBrowser(str(result[0]['tmp'])), 0, 1) # 현재 온도 자료
+        grid.addWidget(QTextBrowser(str(result[0]['reh'])), 1, 1) # 현재 습도 자료
+        grid.addWidget(QTextBrowser(str(result[0]['pop'])), 2, 1) # 현재 강수량 자료
 
         hbox = QHBoxLayout() # 온습강 그리드와 날씨 아이콘
         hbox.addStretch(1)
