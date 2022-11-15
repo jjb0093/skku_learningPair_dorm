@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import QDateTime
+from PyQt5.QtCore import QDateTime, QSize, Qt
 from modules import weather as w
 
 
@@ -18,10 +18,10 @@ class MyApp(QWidget):
         result = w.getWeather(MyApp.campus)
         print(result)
 
-        pixmap = QPixmap('sun.jpg') # 날씨 아이콘 - 예제
+        weatherpic = QPixmap('sun.jpg') # 날씨 아이콘 - 예제
 
         lbl_img = QLabel()
-        lbl_img.setPixmap(pixmap)
+        lbl_img.setPixmap(weatherpic)
 
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
@@ -58,12 +58,16 @@ class MyApp(QWidget):
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
         grid.addWidget(QLabel("온도: "), 0, 0)
-        grid.addWidget(QLabel("습도: "), 1, 0)
-        grid.addWidget(QLabel("강수량: "), 2, 0)
+        grid.addWidget(QLabel(), 1, 0)
+        grid.addWidget(QLabel("습도: "), 2, 0)
+        grid.addWidget(QLabel(), 3, 0)
+        grid.addWidget(QLabel("강수량: "), 4, 0)
 
-        grid.addWidget(QLabel(str(result[0]['tmp'])), 0, 1) # 현재 온도 자료
-        grid.addWidget(QLabel(str(result[0]['reh'])), 1, 1) # 현재 습도 자료
-        grid.addWidget(QLabel(str(result[0]['pop'])), 2, 1) # 현재 강수량 자료
+        grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 0, 1) # 현재 온도 자료
+        grid.addWidget(QLabel(), 1, 1)
+        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 2, 1) # 현재 습도 자료
+        grid.addWidget(QLabel(), 3, 1)
+        grid.addWidget(QLabel(str(result[0]['pop'])+"mm"), 4, 1) # 현재 강수량 자료
 
         hbox = QHBoxLayout() # 온습강 그리드와 날씨 아이콘
         hbox.addStretch(1)
@@ -78,6 +82,16 @@ class MyApp(QWidget):
         vbox.addStretch(1)
         vbox.addWidget(tableWidget)
         vbox.addStretch(4)
+
+        pixmap = QPixmap('images/back.png')
+        pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
+
+        icon = QIcon()
+        icon.addPixmap(pixmap)
+
+        button = QPushButton(self)
+        button.setIcon(icon)
+        button.setIconSize(QSize(30, 30))
 
         self.setLayout(vbox)
 
