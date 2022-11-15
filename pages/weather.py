@@ -27,16 +27,16 @@ class MyApp(QWidget):
         tableWidget = QTableWidget() # 표 세팅
         tableWidget.resize(200,600)
         tableWidget.setRowCount(1)
-        tableWidget.setColumnCount(7)
+        tableWidget.setColumnCount(6)
 
         tableWidget.setVerticalHeaderItem(0, QTableWidgetItem('날씨'))
-        for i in range(7):
+        for i in range(6):
             tableWidget.setHorizontalHeaderItem(i, QTableWidgetItem(time.addSecs(3600*i).toString('hh:mm')))
 
         tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        for i in range(1, 7):
+        for i in range(1, 6):
             print(result[i]['dayTime'])
         # tableWidget.setItem(i, j, QTableWidgetItem()) - 여기다가 자료 채워주세용
 
