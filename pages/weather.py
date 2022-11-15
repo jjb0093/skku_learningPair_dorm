@@ -18,11 +18,6 @@ class MyApp(QWidget):
         result = w.getWeather(MyApp.campus)
         print(result)
 
-        weatherpic = QPixmap('sun.jpg') # 날씨 아이콘 - 예제
-
-        lbl_img = QLabel()
-        lbl_img.setPixmap(weatherpic)
-
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
         tableWidget = QTableWidget() # 표 세팅
@@ -59,10 +54,8 @@ class MyApp(QWidget):
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
         grid.addWidget(QLabel("온도: "), 0, 0)
-        grid.addWidget(QLabel(), 1, 0)
-        grid.addWidget(QLabel("습도: "), 2, 0)
-        grid.addWidget(QLabel(), 3, 0)
-        grid.addWidget(QLabel("강수확률: "), 4, 0)
+        grid.addWidget(QLabel("습도: "), 1, 0)
+        grid.addWidget(QLabel("강수확률: "), 2, 0)
 
         sky_now = int(result[0]['sky'])
         pty_now = int(result[0]['pty'])
@@ -75,24 +68,43 @@ class MyApp(QWidget):
             elif (pty_now == 2 or pty_now == 3): state = " 눈"
 
         grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 0, 1) # 현재 온도 자료
-        grid.addWidget(QLabel(), 1, 1)
-        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 2, 1) # 현재 습도 자료
-        grid.addWidget(QLabel(), 3, 1)
-        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 4, 1) # 현재 강수확률 자료
+        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 1, 1) # 현재 습도 자료
+        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 2, 1) # 현재 강수확률 자료
+
+        lbl_img = QLabel()
+        lbl_img.resize(500, 500)
+
+        cloudpic = QPixmap('images/cloud.png')
+        cloudpic = cloudpic.scaledToWidth(500)
+        rainpic = QPixmap('images/rain.png')
+        rainpic = rainpic.scaledToWidth(500)
+        snowpic = QPixmap('images/snow.png')
+        snowpic = snowpic.scaledToWidth(500)
+        sunpic = QPixmap('images/sun.png')
+        sunpic = sunpic.scaledToWidth(500)
+
+        if (sky_now == 1): lbl_img.addPixmap(sunpic)
+        else:
+            if (pty_now == 0):
+                if (sky_now == 3): lbl_img.setPixmap(cloudpic)
+                elif (sky_now == 4): lbl_img.setPixmap(cloudpic)
+            elif (pty_now == 1 or pty_now == 4): lbl_img.setPixmap(rainpic)
+            elif (pty_now == 2 or pty_now == 3): lbl_img.setPixmap(snowpic)
+
 
         hbox = QHBoxLayout() # 온습강 그리드와 날씨 아이콘
-        hbox.addStretch(1)
-        hbox.addLayout(grid)
         hbox.addWidget(lbl_img)
+        hbox.addLayout(grid)
+        hbox.addStretch(3)
 
         vbox = QVBoxLayout() #hbox와 시간별 날씨 표시
-        vbox.addStretch(4)
+        vbox.addStretch(1)
         vbox.addLayout(hbox)
         vbox.addStretch(2)
         vbox.addWidget(QLabel('시간별 날씨'))
         vbox.addStretch(1)
         vbox.addWidget(tableWidget)
-        vbox.addStretch(4)
+        vbox.addStretch(1)
 
         pixmap = QPixmap('images/back.png')
         pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
