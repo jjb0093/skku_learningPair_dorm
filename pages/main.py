@@ -8,7 +8,6 @@ class MyApp(QWidget):
     f = open("init.txt", 'r')
     campus = f.read()
     f.close()
-    print(campus)
 
     def __init__(self):
         super().__init__()

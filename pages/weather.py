@@ -2,15 +2,20 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QDateTime
+from modules import weather as w
 
 
 class MyApp(QWidget):
+    f = open("init.txt", 'r')
+    campus = f.read()
+    f.close()
 
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
+        result = w.getWeather(MyApp.campus)
 
         pixmap = QPixmap('sun.jpg') # 날씨 아이콘 - 예제
 
@@ -30,8 +35,9 @@ class MyApp(QWidget):
         tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
+        for i in range(1, 7):
+            print(result[i]['dayTime'])
         # tableWidget.setItem(i, j, QTableWidgetItem()) - 여기다가 자료 채워주세용
-
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
         grid.addWidget(QLabel("온도: "), 0, 0)
@@ -61,7 +67,6 @@ class MyApp(QWidget):
         self.setWindowTitle('Weather')
         self.setGeometry(300, 100, 800, 600)
         self.show()
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

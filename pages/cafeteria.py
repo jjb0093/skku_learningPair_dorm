@@ -5,6 +5,9 @@ from PyQt5.QtCore import Qt, QSize
 from modules import cafeteria
 
 class MyApp(QWidget):
+    f = open("init.txt", 'r')
+    campus = f.read()
+    f.close()
 
     def __init__(self):
         super().__init__()
@@ -60,7 +63,7 @@ class MyApp(QWidget):
         button.setIcon(icon)
         button.setIconSize(QSize(30, 30))
 
-        result = cafeteria.getFood("Seoul")
+        result = cafeteria.getFood(MyApp.campus)
         food = []
         for i in range(len(result)): food.append(result[i])
         for i in range(len(food[0].keys())):
