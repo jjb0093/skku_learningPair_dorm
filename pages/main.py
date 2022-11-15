@@ -65,6 +65,7 @@ class MyApp(QWidget):
         self.noticeSuwondata = QTextBrowser() # 여기에 수원 날씨 관련 자료 넣기
 
         self.noticebody = QTextBrowser()
+        self.noticebody.setOpenExternalLinks(True)
         MyApp.showNotice(self)
 
         self.radio1 = QRadioButton('인사캠')
