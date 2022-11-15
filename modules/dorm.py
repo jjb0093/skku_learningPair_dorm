@@ -1,13 +1,13 @@
 from bs4 import BeautifulSoup
 import requests
 
-def getDorm(loc):
-    page = 1
+def getDorm(loc, page):
 
     url_Seoul = 'https://dorm.skku.edu/dorm_seoul/notice/notice_all.jsp?mode=list&board_no=78&pager.offset=' + str((page - 1) * 10)
     url_Suwon = 'https://dorm.skku.edu/dorm_suwon/notice/notice_all.jsp?mode=list&board_no=16&pager.offset=' + str((page - 1) * 10)
     if(loc == "Seoul"): url = url_Seoul
     elif(loc == "Suwon"): url = url_Suwon
+    print(url)
 
     soup = BeautifulSoup(requests.get(url).text, 'html.parser')
     tr = soup.select("table tbody tr")

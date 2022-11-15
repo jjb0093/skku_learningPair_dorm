@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
-
+from modules import dorm
 
 class MyApp(QWidget):
     f = open("init.txt", 'r')
@@ -64,7 +64,18 @@ class MyApp(QWidget):
         self.noticeSuwonbody = QVBoxLayout()
         self.noticeSuwondata = QTextBrowser() # 여기에 수원 날씨 관련 자료 넣기
 
+        result_notice = dorm.getDorm(MyApp.campus, 2)
+        print(len(result_notice[1]) - int(result_notice[0]))
+
         self.noticebody = QTextBrowser()
+        self.noticebody.setText("")
+
+        url = {"Seoul":"https://dorm.skku.edu/dorm_seoul/notice/notice_all.jsp"}
+        for i in range(int(result_notice[0])):
+            self.noticebody.append("<a href='" + url[MyApp.campus] + result_notice[1][i][5] + "'><p style='color: red;'>" + result_notice[1][i][2] + "</p></a>")
+            print("<a href='" + url[MyApp.campus] + result_notice[1][i][5] + "'><p style='color: red;'>" + result_notice[1][i][2] + "</p></a>")
+        for i in range(len(result_notice[1]) - int(result_notice[0])):
+            self.noticebody.append("<p style='color: black;'>" + result_notice[1][i+2][2] + "</p>")
 
         self.radio1 = QRadioButton('인사캠')
         self.radio2 = QRadioButton('자과캠')
