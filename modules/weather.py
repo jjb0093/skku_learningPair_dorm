@@ -55,6 +55,7 @@ def getWeather(loc):
         details["tmp"] = data[1][1][0 + count][5].text
         details["reh"] = data[1][1][10 + count][5].text
         details["pop"] = data[1][1][7 + count][5].text
+        details["pty"] = data[1][1][6 + count][5].text
 
         pageNum += 1
         if (nowHour == 23): nowHour = 0

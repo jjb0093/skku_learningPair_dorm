@@ -16,6 +16,7 @@ class MyApp(QWidget):
 
     def initUI(self):
         result = w.getWeather(MyApp.campus)
+        print(result)
 
         pixmap = QPixmap('sun.jpg') # 날씨 아이콘 - 예제
 
@@ -26,19 +27,34 @@ class MyApp(QWidget):
 
         tableWidget = QTableWidget() # 표 세팅
         tableWidget.resize(200,600)
-        tableWidget.setRowCount(1)
+        tableWidget.setRowCount(4)
         tableWidget.setColumnCount(6)
 
         tableWidget.setVerticalHeaderItem(0, QTableWidgetItem('날씨'))
+        tableWidget.setVerticalHeaderItem(1, QTableWidgetItem('온도'))
+        tableWidget.setVerticalHeaderItem(2, QTableWidgetItem('습도'))
+        tableWidget.setVerticalHeaderItem(3, QTableWidgetItem('강수확률'))
         for i in range(6):
-            tableWidget.setHorizontalHeaderItem(i, QTableWidgetItem(time.addSecs(3600*i).toString('hh:mm')))
+            tableWidget.setHorizontalHeaderItem(i, QTableWidgetItem(time.addSecs(3600*(i+1)).toString('hh')+"시"))
 
         tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        for i in range(1, 6):
-            print(result[i]['dayTime'])
-        # tableWidget.setItem(i, j, QTableWidgetItem()) - 여기다가 자료 채워주세용
+        for i in range(6):
+            sky = int(result[i+1]['sky'])
+            pty = int(result[i+1]['pty'])
+            if(sky == 1): tableWidget.setItem(0, i, QTableWidgetItem("맑음"))
+            else:
+                if(pty == 0):
+                    if(sky == 3): tableWidget.setItem(0, i, QTableWidgetItem("구름 많음"))
+                    elif(sky == 4): tableWidget.setItem(0, i, QTableWidgetItem("흐림"))
+                elif(pty == 1 or pty == 4): tableWidget.setItem(0, i, QTableWidgetItem("비"))
+                elif(pty == 2 or pty == 3): tableWidget.setItem(0, i, QTableWidgetItem("눈"))
+
+        for i in range(1, 4):
+            for k in range(6):
+                tableWidget.setItem(i, k, QTableWidgetItem(str(list(result[k+1].values())[i+1])))
+
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
         grid.addWidget(QLabel("온도: "), 0, 0)
