@@ -50,7 +50,7 @@ class MyApp(QWidget):
         font3.setBold(True)
         lb3.setFont(font3)
 
-        pixmap = QPixmap('pages/back.png')
+        pixmap = QPixmap('images/back.png')
         pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
 
         icon = QIcon()

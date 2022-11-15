@@ -37,7 +37,7 @@ class MyApp(QWidget):
         self.tb.move(30,160)
         self.tb.resize(740,400)
 
-        pixmap = QPixmap('pages/back.png')
+        pixmap = QPixmap('images/back.png')
         pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
 
         icon = QIcon()
