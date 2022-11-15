@@ -27,7 +27,6 @@ class MyApp(QWidget):
         tableWidget.setVerticalHeaderItem(0, QTableWidgetItem('날씨'))
         for i in range(7):
             tableWidget.setHorizontalHeaderItem(i, QTableWidgetItem(time.addSecs(3600*i).toString('hh:mm')))
-
         tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         # tableWidget.setItem(i, j, QTableWidgetItem()) - 여기다가 자료 채워주세용
