@@ -113,6 +113,7 @@ def getNowWeather(loc):
     details["tmp"] = data[1][1][0][5].text
     details["reh"] = data[1][1][10][5].text
     details["pop"] = data[1][1][7][5].text
+    details["pty"] = data[1][1][6][5].text
 
     weatherDetails.append(details)
 

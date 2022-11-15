@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
-from modules import dorm
+from modules import dorm, weather
 
 class MyApp(QWidget):
     f = open("init.txt", 'r')
@@ -92,6 +92,8 @@ class MyApp(QWidget):
         allgrid.addLayout(notice)
         allgrid.addLayout(rightgrid)
 
+        self.showWeather()
+
         self.setLayout(allgrid)
 
         self.setWindowTitle('Main')
@@ -100,7 +102,6 @@ class MyApp(QWidget):
 
     def showNotice(self):
         result_notice = dorm.getDorm(MyApp.campus, 2)
-        print(len(result_notice[1]) - int(result_notice[0]))
 
         self.noticebody.setText("")
         url = {"Seoul": "https://dorm.skku.edu/dorm_seoul/notice/notice_all.jsp",
@@ -108,10 +109,23 @@ class MyApp(QWidget):
 
         for i in range(int(result_notice[0])):
             self.noticebody.append(
-                "<p style='color: red;' onclick=window.open('" + url[MyApp.campus] + result_notice[1][i][5] + "');>" +
-                result_notice[1][i][2] + "</p>")
+                "<a href=" + url[MyApp.campus] + result_notice[1][i][5] + "><p style='color: red;');>" +
+                result_notice[1][i][2] + "</p></a>")
         for i in range(len(result_notice[1]) - int(result_notice[0])):
-            self.noticebody.append("<p style='color: black;'>" + result_notice[1][i + 2][2] + "</p>")
+            self.noticebody.append("<a href=" + url[MyApp.campus] + result_notice[1][i+2][5] + "><p style='color: black;'>" + result_notice[1][i + 2][2] + "</p></a>")
+
+    def showWeather(self):
+        result = weather.getNowWeather(MyApp.campus)
+        sky = int(result[0]['sky'])
+        pty = int(result[0]['pty'])
+        if (sky == 1): state = "맑음"
+        else:
+            if (pty == 0):
+                if (sky == 3): state = "구름많음"
+                elif (sky == 4): state = "흐림"
+            elif (pty == 1 or pty == 4): state = "비"
+            elif (pty == 2 or pty == 3): state = " 눈"
+
 
     def radio1_clicked(self, enabled):
         if enabled:

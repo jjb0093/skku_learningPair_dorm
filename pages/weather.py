@@ -91,13 +91,10 @@ class MyApp(QWidget):
         sunpic = QPixmap('images/sun.png')
         sunpic = sunpic.scaledToWidth(300)
 
-        if (sky_now == 1): lbl_img.setPixmap(sunpic)
-        else:
-            if (pty_now == 0):
-                if (sky_now == 3): lbl_img.setPixmap(cloudpic)
-                elif (sky_now == 4): lbl_img.setPixmap(cloudpic)
-            elif (pty_now == 1 or pty_now == 4): lbl_img.setPixmap(rainpic)
-            elif (pty_now == 2 or pty_now == 3): lbl_img.setPixmap(snowpic)
+        if(state == "맑음"): lbl_img.setPixmap(sunpic)
+        elif(state == "흐림" or state == "구름많음"): lbl_img.setPixmap(cloudpic)
+        elif(state == "비"): lbl_img.setPixmap(rainpic)
+        elif(state == "눈"): lbl_img.setPixmap(snowpic)
 
         photobox = QVBoxLayout()
         photobox.addStretch(6)
