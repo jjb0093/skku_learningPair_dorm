@@ -6,8 +6,9 @@ from modules import dorm, weather
 from pages import page_delivery, page_weather, page_cafeteria
 
 class MyApp(QWidget):
+
     f = open("init.txt", 'r')
-    campus = f.read()
+    campus = f.readlines()[0]
     f.close()
 
     def __init__(self):
@@ -15,6 +16,8 @@ class MyApp(QWidget):
         self.initUI()
 
     def initUI(self):
+        MyApp.fileCheck(self)
+
         pixmap1 = QPixmap('images/delivery.png') # 박스 아이콘 @ 택배조회 칸
         pixmap1 = pixmap1.scaled(200, 200, Qt.IgnoreAspectRatio)
         boximage = QLabel()
@@ -108,6 +111,14 @@ class MyApp(QWidget):
         self.setWindowTitle('Main')
         self.setGeometry(300, 100, 800, 600)
         self.show()
+
+    def fileCheck(self):
+        import os
+        if(not os.path.isfile("init.txt")):
+            self.campus = "Seoul"
+            f = open.file("init.txt", 'w')
+            f.write("Seoul")
+            f.close
 
     def openPage(self, page):
         if(page == "delivery"):
