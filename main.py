@@ -176,8 +176,13 @@ class MyApp(QWidget):
 
     def showWeather(self):
         result = weather.getNowWeather(MyApp.campus)
+
         sky = int(result[0]['sky'])
         pty = int(result[0]['pty'])
+        tmp = result[0]['tmp']
+        reh = result[0]['reh']
+        pop = result[0]['pop']
+
         if (sky == 1): state = "맑음"
         else:
             if (pty == 0):
