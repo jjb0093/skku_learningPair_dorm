@@ -21,37 +21,38 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        font = QFont("Helvetica", 13)
+        self.setFont(font)
 
     def initUI(self):
 
         pixmap1 = QPixmap('images/delivery.png') # 박스 아이콘 @ 택배조회 칸
-        pixmap1 = pixmap1.scaled(200, 200, Qt.IgnoreAspectRatio)
+        pixmap1 = pixmap1.scaled(250, 250, Qt.IgnoreAspectRatio)
         boximage = QLabel()
         boximage.setPixmap(pixmap1)
         #self.page_delivery = delivery.MyApp()
         #boximage.mousePressEvent = self.page_delivery.show
 
         pixmap2 = QPixmap('images/food.png') # 수저 아이콘 @ 식단조회 칸
-        pixmap2 = pixmap2.scaled(200, 200, Qt.IgnoreAspectRatio)
+        pixmap2 = pixmap2.scaled(250, 250, Qt.IgnoreAspectRatio)
         soojeoimage = QLabel()
         soojeoimage.setPixmap(pixmap2)
 
+        pixmap3 = QPixmap('images/skku.png')  # 성대 아이콘 @ 메인
+        pixmap3 = pixmap3.scaled(40, 40, Qt.IgnoreAspectRatio)
+        skkuimage = QLabel()
+        skkuimage.setPixmap(pixmap3)
+
         postpage = QVBoxLayout()
-        postpage.addStretch(1)
         btnDelivery = QPushButton("택배조회")
         postpage.addWidget(btnDelivery)
-        postpage.addStretch(3)
         postpage.addWidget(boximage)
-        postpage.addStretch(4)
         btnDelivery.clicked.connect(lambda :self.openPage("delivery"))
 
         foodpage = QVBoxLayout()
-        foodpage.addStretch(1)
         btnFood = QPushButton("식단")
         foodpage.addWidget(btnFood)
-        foodpage.addStretch(3)
         foodpage.addWidget(soojeoimage)
-        foodpage.addStretch(4)
         btnFood.clicked.connect(lambda :self.openPage("cafeteria"))
 
         postandfood = QHBoxLayout()
@@ -73,8 +74,18 @@ class MyApp(QWidget):
         rightgrid.addLayout(weatherpage)
         rightgrid.addLayout(postandfood)
 
-        if (MyApp.campus == "Seoul"): self.noticehead = QLabel("인문사회과학캠퍼스\n \n공지사항")
-        else: self.noticehead = QLabel("자연과학캠퍼스\n \n공지사항")
+        if (MyApp.campus == "Seoul"): self.noticehead = QLabel("성균관대학교 인문사회과학캠퍼스")
+        else: self.noticehead = QLabel("성균관대학교 자연과학캠퍼스     ")
+        self.noticehead.setFixedWidth(400)
+
+        font1 = self.noticehead.font()
+        font1.setPointSize(30)
+        font1.setFamily('Helvetica')
+        font1.setBold(True)
+
+        self.noticehead.setFont(font1)
+
+        gongji = QLabel("공지사항")
 
         self.noticeSeoulbody = QVBoxLayout()
         self.noticeSeouldata = QTextBrowser() #여기에 서울 날씨 관련 자료 넣기
@@ -94,13 +105,15 @@ class MyApp(QWidget):
         self.radio1.toggled.connect(self.radio1_clicked)
         self.radio2.toggled.connect(self.radio2_clicked)
 
-        radiobox = QVBoxLayout()
+        radiobox = QHBoxLayout()
         radiobox.addWidget(self.radio1)
         radiobox.addWidget(self.radio2)
 
-        headandbutton = QHBoxLayout()
-        headandbutton.addWidget(self.noticehead)
-        headandbutton.addLayout(radiobox)
+        headandbutton = QGridLayout()
+        headandbutton.addWidget(skkuimage, 0, 0)
+        headandbutton.addWidget(self.noticehead, 0, 2)
+        headandbutton.addWidget(gongji, 3, 0)
+        headandbutton.addLayout(radiobox, 3, 6)
 
         notice = QVBoxLayout()
         notice.addLayout(headandbutton)
@@ -115,7 +128,7 @@ class MyApp(QWidget):
         self.setLayout(allgrid)
 
         self.setWindowTitle('Main')
-        self.setGeometry(300, 100, 800, 600)
+        self.setGeometry(300, 100, 900, 700)
         self.show()
 
     def fileCheck(self):
@@ -169,7 +182,7 @@ class MyApp(QWidget):
 
     def radio1_clicked(self, enabled):
         if enabled:
-            self.noticehead.setText('인문사회과학캠퍼스\n \n공지사항')
+            self.noticehead.setText('성균관대학교 인문사회과학캠퍼스')
             self.noticebody.setLayout(self.noticeSeoulbody)
             MyApp.campus = "Seoul"
             f = open("init.txt", 'r')
@@ -182,7 +195,7 @@ class MyApp(QWidget):
 
     def radio2_clicked(self, enabled):
         if enabled:
-            self.noticehead.setText('자연과학캠퍼스\n \n공지사항')
+            self.noticehead.setText('성균관대학교 자연과학캠퍼스')
             self.noticebody.setLayout(self.noticeSuwonbody)
             MyApp.campus = "Suwon"
             f = open("init.txt", 'r')

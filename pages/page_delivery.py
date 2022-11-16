@@ -41,16 +41,6 @@ class Delivery(QWidget):
         self.tb.move(30,160)
         self.tb.resize(740,400)
 
-        pixmap = QPixmap('images/back.png')
-        pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
-
-        icon = QIcon()
-        icon.addPixmap(pixmap)
-
-        button = QPushButton(self)
-        button.setIcon(icon)
-        button.setIconSize(QSize(30, 30))
-
         self.setWindowTitle('POST')
         self.setGeometry(300, 300, 800, 600)
         self.show()

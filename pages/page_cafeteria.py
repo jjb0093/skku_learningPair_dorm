@@ -51,16 +51,6 @@ class Cafeteria(QWidget):
         font3.setBold(True)
         lb3.setFont(font3)
 
-        pixmap = QPixmap('images/back.png')
-        pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
-
-        icon = QIcon()
-        icon.addPixmap(pixmap)
-
-        button = QPushButton(self)
-        button.setIcon(icon)
-        button.setIconSize(QSize(30, 30))
-
         f = open("init.txt", 'r')
         campus = f.readlines()[0].replace("\n", "")
         result = cafeteria.getFood(campus)

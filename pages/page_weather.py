@@ -118,16 +118,6 @@ class Weather(QWidget):
         vbox.addWidget(tableWidget)
         vbox.addStretch(2)
 
-        pixmap = QPixmap('images/back.png')
-        pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
-
-        icon = QIcon()
-        icon.addPixmap(pixmap)
-
-        button = QPushButton(self)
-        button.setIcon(icon)
-        button.setIconSize(QSize(30, 30))
-
         self.setLayout(vbox)
 
         self.setWindowTitle('Weather')
