@@ -59,14 +59,21 @@ class MyApp(QWidget):
         postandfood.addLayout(postpage)
         postandfood.addLayout(foodpage)
 
-        weatherdata = QTextBrowser()
+        self.weatherpic = QLabel()
+        self.weatherpic.resize(300, 300)
+
+        self.weatherdata = QLabel()
+
+        weatherinfo = QHBoxLayout()
+        weatherinfo.addWidget(self.weatherpic)
+        weatherinfo.addWidget(self.weatherdata)
 
         weatherpage = QVBoxLayout()
         weatherpage.addStretch(1)
         btnWeather = QPushButton("날씨")
         weatherpage.addWidget(btnWeather)
         weatherpage.addStretch(3)
-        weatherpage.addWidget(weatherdata)
+        weatherpage.addLayout(weatherinfo)
         weatherpage.addStretch(3)
         btnWeather.clicked.connect(lambda :self.openPage("weather"))
 
@@ -74,8 +81,8 @@ class MyApp(QWidget):
         rightgrid.addLayout(weatherpage)
         rightgrid.addLayout(postandfood)
 
-        if (MyApp.campus == "Seoul"): self.noticehead = QLabel("성균관대학교 인문사회과학캠퍼스")
-        else: self.noticehead = QLabel("성균관대학교 자연과학캠퍼스     ")
+        if (MyApp.campus == "Seoul"): self.noticehead = QLabel("인문사회과학캠퍼스")
+        else: self.noticehead = QLabel("자연과학캠퍼스")
         self.noticehead.setFixedWidth(400)
 
         font1 = self.noticehead.font()
@@ -179,10 +186,28 @@ class MyApp(QWidget):
             elif (pty == 1 or pty == 4): state = "비"
             elif (pty == 2 or pty == 3): state = " 눈"
 
+        cloudpic = QPixmap('images/cloud.png')
+        cloudpic = cloudpic.scaledToWidth(300)
+        rainpic = QPixmap('images/rain.png')
+        rainpic = rainpic.scaledToWidth(300)
+        snowpic = QPixmap('images/snow.png')
+        snowpic = snowpic.scaledToWidth(300)
+        sunpic = QPixmap('images/sun.png')
+        sunpic = sunpic.scaledToWidth(300)
+
+        if (state == "맑음"):
+            self.weatherpic.setPixmap(sunpic)
+        elif (state == "흐림" or state == "구름많음"):
+            self.weatherpic.setPixmap(cloudpic)
+        elif (state == "비"):
+            self.weatherpic.setPixmap(rainpic)
+        elif (state == "눈"):
+            self.weatherpic.setPixmap(snowpic)
+
 
     def radio1_clicked(self, enabled):
         if enabled:
-            self.noticehead.setText('성균관대학교 인문사회과학캠퍼스')
+            self.noticehead.setText('인문사회과학캠퍼스')
             self.noticebody.setLayout(self.noticeSeoulbody)
             MyApp.campus = "Seoul"
             f = open("init.txt", 'r')
@@ -195,7 +220,7 @@ class MyApp(QWidget):
 
     def radio2_clicked(self, enabled):
         if enabled:
-            self.noticehead.setText('성균관대학교 자연과학캠퍼스')
+            self.noticehead.setText('자연과학캠퍼스')
             self.noticebody.setLayout(self.noticeSuwonbody)
             MyApp.campus = "Suwon"
             f = open("init.txt", 'r')
