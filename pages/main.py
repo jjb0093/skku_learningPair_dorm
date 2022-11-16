@@ -1,3 +1,5 @@
+#DO NOT USE!
+"""
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -188,3 +190,4 @@ def show():
     app = QApplication(sys.argv)
     ex = MyApp()
     sys.exit(app.exec_())
+"""
