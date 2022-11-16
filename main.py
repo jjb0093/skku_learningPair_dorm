@@ -5,15 +5,14 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import dorm, weather
-from pages import page_delivery, page_weather, page_cafeteria
 
 class MyApp(QWidget):
 
     if (not os.path.isfile("init.txt")):
         campus = "Seoul"
-        f = open.file("init.txt", 'w')
+        f = open("init.txt", 'w')
         f.write("Seoul")
-        f.close
+        f.close()
     else:
         f = open("init.txt", 'r')
         campus = f.readlines()[0]
@@ -128,6 +127,8 @@ class MyApp(QWidget):
             f.close
 
     def openPage(self, page):
+        from pages import page_delivery, page_weather, page_cafeteria
+
         if(page == "delivery"):
             self.pageDelivery = page_delivery.Delivery()
             self.pageDelivery.show()
