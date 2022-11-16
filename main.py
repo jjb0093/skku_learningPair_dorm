@@ -93,6 +93,7 @@ class MyApp(QWidget):
         weatherinfo.addWidget(self.weatherdata)
 
         weatherpage = QVBoxLayout()
+        weatherpage.addWidget(QLabel("날씨"))
         weatherpage.addWidget(self.button3)
         self.button3.clicked.connect(lambda :self.openPage("weather"))
 
