@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QDateTime, QSize, Qt
-from modules import weather
+from modules import weather_new
 
 
 class Weather(QWidget):
@@ -15,7 +15,8 @@ class Weather(QWidget):
 
         f = open("init.txt", 'r')
         campus = f.readlines()[0].replace("\n", "")
-        result = weather.getWeather(campus)
+        result = weather_new.getWeather(campus)
+        print(result)
         f.close()
 
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅

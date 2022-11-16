@@ -57,12 +57,12 @@ def getWeather(loc):
     for i in range(7):
         details = {}
 
-        details["dayTime"] = str(data[1][1][start + (rotate_count * 12) + plus_count][3].text) + '-' + str(data[1][1][start + (rotate_count * 12) + plus_count][4].text)
-        details["sky"] = str(data[1][1][5 + start + (rotate_count * 12) + plus_count][2].text)
-        details["tmp"] = str(data[1][1][0 + start + (rotate_count * 12) + plus_count][2].text)
-        details["reh"] = str(data[1][1][10 + start + (rotate_count * 12) + plus_count][2].text)
-        details["pop"] = str(data[1][1][7 + start + (rotate_count * 12) + plus_count][2].text)
-        details["pty"] = str(data[1][1][6 + start + (rotate_count * 12) + plus_count][2].text)
+        details["dayTime"] = str(data[1][1][start + (rotate_count * 12) + plus_count][2].text) + '-' + str(data[1][1][start + (rotate_count * 12) + plus_count][4].text)
+        details["sky"] = str(data[1][1][5 + start + (rotate_count * 12) + plus_count][5].text)
+        details["tmp"] = str(data[1][1][0 + start + (rotate_count * 12) + plus_count][5].text)
+        details["reh"] = str(data[1][1][10 + start + (rotate_count * 12) + plus_count][5].text)
+        details["pop"] = str(data[1][1][7 + start + (rotate_count * 12) + plus_count][5].text)
+        details["pty"] = str(data[1][1][6 + start + (rotate_count * 12) + plus_count][5].text)
 
         rotate_count += 1
 
