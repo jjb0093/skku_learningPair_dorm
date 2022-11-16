@@ -31,11 +31,11 @@ class MyApp(QWidget):
         boximage = QLabel()
         boximage.setPixmap(pixmap1)
 
-        icon = QIcon()
-        icon.addPixmap(pixmap1)
+        iicon = QIcon()
+        iicon.addPixmap(pixmap1)
         self.button1 = QPushButton(self)
         self.button1.move(450, 470)
-        self.button1.setIcon(icon)
+        self.button1.setIcon(iicon)
         self.button1.setIconSize(QSize(150, 250))
 
         pixmap2 = QPixmap('images/food.png')  # 박스 아이콘 @ 택배조회 칸
@@ -50,11 +50,11 @@ class MyApp(QWidget):
         self.button2.setIcon(icon)
         self.button2.setIconSize(QSize(150, 250))
 
-        self.wthimage = QLabel()
+        pixmap3 = QPixmap('images/cloud.png')
+        pixmap3 = pixmap3.scaled(500, 500, Qt.IgnoreAspectRatio)
 
         self.wthicon = QIcon()
         self.button3 = QPushButton(self)
-        self.button3.move(450, 100)
         self.button3.setIcon(self.wthicon)
         self.button3.setIconSize(QSize(370, 350))
 
@@ -220,18 +220,11 @@ class MyApp(QWidget):
         sunpic = QPixmap('images/sun.png')
         sunpic = sunpic.scaled(500, 500, Qt.IgnoreAspectRatio)
 
-        if (state == "맑음"):
-            self.wthimage.setPixmap(sunpic)
-            self.wthicon.addPixmap(sunpic)
-        elif (state == "흐림" or state == "구름많음"):
-            self.wthimage.setPixmap(cloudpic)
-            self.wthicon.addPixmap(cloudpic)
-        elif (state == "비"):
-            self.wthimage.setPixmap(rainpic)
-            self.wthicon.addPixmap(rainpic)
-        elif (state == "눈"):
-            self.wthimage.setPixmap(snowpic)
-            self.wthicon.addPixmap(snowpic)
+
+        if (state == "맑음"): self.wthicon.addPixmap(sunpic)
+        elif (state == "흐림" or state == "구름많음"): self.wthicon.addPixmap(cloudpic)
+        elif (state == "비"): self.wthicon.addPixmap(rainpic)
+        elif (state == "눈"): self.wthicon.addPixmap(snowpic)
 
         self.button3.setText(tmp+"°C\n"+state)
         font = QFont("Helvetica", 13)
