@@ -30,8 +30,7 @@ def getWeather(loc):
         else:
             baseTime = str((now - timedelta(hours = ((now.hour - 2) % 3))).strftime("%H00"))
             skipCount = int((now.hour - 2) % 3)
-    elif(now.hour == 1): skipCount = 2
-    elif(now.hour == 2): skipCount = 3
+    else: skipCount = int(now.hour) + 1
 
     numOfRows += (skipCount + 1) * 12
     print(baseTime, baseDate, skipCount, now.hour)
