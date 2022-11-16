@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from modules import delivery
 
 class MyApp(QWidget):
@@ -17,36 +17,26 @@ class MyApp(QWidget):
         self.cb = QComboBox(self)
         for i in range(len(MyApp.companyList)):
             self.cb.addItem(MyApp.companyList[i])
-        self.cb.move(30,100)
+        self.cb.move(30,60)
         self.cb.resize(300,40)
 
         self.qle2 = QLineEdit(self)
-        self.qle2.move(360, 100)
+        self.qle2.move(360, 60)
         self.qle2.resize(300,40)
 
         self.btn1 = QPushButton(self)
         self.btn1.setText('조회')
-        self.btn1.move(690,100)
+        self.btn1.move(690,60)
         self.btn1.resize(80,40)
+        self.btn1.setStyleSheet('QPushButton {background-color: #167023; color: white}')
 
         self.btn1.clicked.connect(self.btn1_clicked)
 
         self.tb = QTextBrowser(self)
         self.tb.setAcceptRichText(True)
         self.tb.setOpenExternalLinks(True)
-        self.tb.move(30,160)
-        self.tb.resize(740,400)
-
-        pixmap = QPixmap('김근아/back.png')
-        pixmap = pixmap.scaled(30, 30, Qt.IgnoreAspectRatio)
-
-        icon = QIcon()
-        icon.addPixmap(pixmap)
-
-        button = QPushButton(self)
-        button.setIcon(icon)
-        button.setIconSize(QSize(30, 30))
-
+        self.tb.move(30,120)
+        self.tb.resize(740,420)
 
         self.setWindowTitle('POST')
         self.setGeometry(300, 300, 800, 600)
