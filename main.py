@@ -176,7 +176,7 @@ class MyApp(QWidget):
             lines = f.readlines()
             f.close()
             f = open("init.txt", 'w')
-            f.write("Seoul\n" + lines[1] + "\n" + lines[2])
+            f.write("Seoul\n" + lines[1] + lines[2])
             f.close
             MyApp.showNotice(self)
 
@@ -189,7 +189,7 @@ class MyApp(QWidget):
             lines = f.readlines()
             f.close()
             f = open("init.txt", 'w')
-            f.write("Suwon\n" + lines[1] + "\n" + lines[2])
+            f.write("Suwon\n" + lines[1] + lines[2])
             f.close
             MyApp.showNotice(self)
 

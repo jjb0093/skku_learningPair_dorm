@@ -7,6 +7,7 @@ from modules import delivery
 class Delivery(QWidget):
     f = open("init.txt", 'r')
     lines = f.readlines()
+    campus = lines[0].replace("\n", "")
     f.close()
 
     companyList = ['CJ 대한통운', '우체국택배', '한진택배', '롯데택배', '로젠택배', '경동택배', 'CVSnet 편의점택배(GS25)', 'CU 편의점택배']
@@ -66,7 +67,7 @@ class Delivery(QWidget):
     def write(self, code, invoice):
         print(code, invoice)
         f = open("init.txt", 'w')
-        f.write(Delivery.lines[0] + "\n" + code + "\n" + invoice)
+        f.write(Delivery.campus + "\n" + code + "\n" + invoice)
         f.close()
 
 
