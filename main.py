@@ -63,6 +63,11 @@ class MyApp(QWidget):
         self.weatherpic.resize(300, 300)
 
         self.weatherdata = QLabel()
+        font1 = self.weatherdata.font()
+        font1.setPointSize(30)
+        font1.setFamily('Helvetica')
+        font1.setBold(True)
+        self.weatherdata.setFont(font1)
 
         weatherinfo = QHBoxLayout()
         weatherinfo.addWidget(self.weatherpic)
@@ -85,12 +90,12 @@ class MyApp(QWidget):
         else: self.noticehead = QLabel("자연과학캠퍼스")
         self.noticehead.setFixedWidth(400)
 
-        font1 = self.noticehead.font()
-        font1.setPointSize(30)
-        font1.setFamily('Helvetica')
-        font1.setBold(True)
+        font2 = self.noticehead.font()
+        font2.setPointSize(30)
+        font2.setFamily('Helvetica')
+        font2.setBold(True)
 
-        self.noticehead.setFont(font1)
+        self.noticehead.setFont(font2)
 
         gongji = QLabel("공지사항")
 
@@ -208,6 +213,8 @@ class MyApp(QWidget):
             self.weatherpic.setPixmap(rainpic)
         elif (state == "눈"):
             self.weatherpic.setPixmap(snowpic)
+
+        self.weatherdata.setText(tmp+"°C\n"+state)
 
 
     def radio1_clicked(self, enabled):
