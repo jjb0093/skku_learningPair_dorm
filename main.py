@@ -15,7 +15,7 @@ class MyApp(QWidget):
         f.close()
     else:
         f = open("init.txt", 'r')
-        campus = f.readlines()[0]
+        campus = f.readlines()[0].replace("\n","")
         f.close()
 
     def __init__(self):
@@ -140,7 +140,7 @@ class MyApp(QWidget):
             self.pageCafeteria.show()
 
     def showNotice(self):
-        result_notice = dorm.getDorm(MyApp.campus, 2)
+        result_notice = dorm.getDorm(MyApp.campus, 1)
 
         self.noticebody.setText("")
         url = {"Seoul": "https://dorm.skku.edu/dorm_seoul/notice/notice_all.jsp",
@@ -172,8 +172,11 @@ class MyApp(QWidget):
             self.noticehead.setText('인문사회과학캠퍼스\n \n공지사항')
             self.noticebody.setLayout(self.noticeSeoulbody)
             MyApp.campus = "Seoul"
+            f = open("init.txt", 'r')
+            lines = f.readlines()
+            f.close()
             f = open("init.txt", 'w')
-            f.write("Seoul")
+            f.write("Seoul\n" + lines[1] + "\n" + lines[2])
             f.close
             MyApp.showNotice(self)
 
@@ -182,8 +185,11 @@ class MyApp(QWidget):
             self.noticehead.setText('자연과학캠퍼스\n \n공지사항')
             self.noticebody.setLayout(self.noticeSuwonbody)
             MyApp.campus = "Suwon"
+            f = open("init.txt", 'r')
+            lines = f.readlines()
+            f.close()
             f = open("init.txt", 'w')
-            f.write("Suwon")
+            f.write("Suwon\n" + lines[1] + "\n" + lines[2])
             f.close
             MyApp.showNotice(self)
 

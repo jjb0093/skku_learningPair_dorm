@@ -62,7 +62,8 @@ class Cafeteria(QWidget):
         button.setIconSize(QSize(30, 30))
 
         f = open("init.txt", 'r')
-        result = cafeteria.getFood(f.readlines()[0])
+        campus = f.readlines()[0].replace("\n", "")
+        result = cafeteria.getFood(campus)
         f.close()
 
         food = []
