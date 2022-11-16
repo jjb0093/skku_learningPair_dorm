@@ -3,7 +3,7 @@ import os
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QSize
 from modules import dorm, weather
 
 class MyApp(QWidget):
@@ -26,34 +26,54 @@ class MyApp(QWidget):
 
     def initUI(self):
 
-        pixmap1 = QPixmap('images/delivery.png') # 박스 아이콘 @ 택배조회 칸
-        pixmap1 = pixmap1.scaled(250, 250, Qt.IgnoreAspectRatio)
+        pixmap1 = QPixmap('images/delivery.png')  # 박스 아이콘 @ 택배조회 칸
+        pixmap1 = pixmap1.scaled(500, 500, Qt.IgnoreAspectRatio)
         boximage = QLabel()
         boximage.setPixmap(pixmap1)
-        #self.page_delivery = delivery.MyApp()
-        #boximage.mousePressEvent = self.page_delivery.show
 
-        pixmap2 = QPixmap('images/food.png') # 수저 아이콘 @ 식단조회 칸
-        pixmap2 = pixmap2.scaled(250, 250, Qt.IgnoreAspectRatio)
-        soojeoimage = QLabel()
-        soojeoimage.setPixmap(pixmap2)
+        icon = QIcon()
+        icon.addPixmap(pixmap1)
+        self.button1 = QPushButton(self)
+        self.button1.move(450, 470)
+        self.button1.setIcon(icon)
+        self.button1.setIconSize(QSize(150, 250))
 
-        pixmap3 = QPixmap('images/skku.png')  # 성대 아이콘 @ 메인
-        pixmap3 = pixmap3.scaled(40, 40, Qt.IgnoreAspectRatio)
+        pixmap2 = QPixmap('images/food.png')  # 박스 아이콘 @ 택배조회 칸
+        pixmap2 = pixmap2.scaled(500, 500, Qt.IgnoreAspectRatio)
+        foodimage = QLabel()
+        foodimage.setPixmap(pixmap2)
+
+        icon = QIcon()
+        icon.addPixmap(pixmap2)
+        self.button2 = QPushButton(self)
+        self.button2.move(670, 470)
+        self.button2.setIcon(icon)
+        self.button2.setIconSize(QSize(150, 250))
+
+        self.wthimage = QLabel()
+
+        self.wthicon = QIcon()
+        self.button3 = QPushButton(self)
+        self.button3.move(450, 100)
+        self.button3.setIcon(self.wthicon)
+        self.button3.setIconSize(QSize(370, 350))
+
+
+        pixmap4 = QPixmap('images/skku.png')
+        pixmap4 = pixmap4.scaled(40, 40, Qt.IgnoreAspectRatio)
         skkuimage = QLabel()
-        skkuimage.setPixmap(pixmap3)
+        skkuimage.setPixmap(pixmap4)
+        skkuimage.resize(40, 40)
 
         postpage = QVBoxLayout()
-        btnDelivery = QPushButton("택배조회")
-        postpage.addWidget(btnDelivery)
-        postpage.addWidget(boximage)
-        btnDelivery.clicked.connect(lambda :self.openPage("delivery"))
+        postpage.addWidget(QLabel("택배조회"))
+        postpage.addWidget(self.button1)
+        self.button1.clicked.connect(lambda :self.openPage("delivery"))
 
         foodpage = QVBoxLayout()
-        btnFood = QPushButton("식단")
-        foodpage.addWidget(btnFood)
-        foodpage.addWidget(soojeoimage)
-        btnFood.clicked.connect(lambda :self.openPage("cafeteria"))
+        foodpage.addWidget(QLabel("식단"))
+        foodpage.addWidget(self.button2)
+        self.button2.clicked.connect(lambda :self.openPage("cafeteria"))
 
         postandfood = QHBoxLayout()
         postandfood.addLayout(postpage)
@@ -74,13 +94,8 @@ class MyApp(QWidget):
         weatherinfo.addWidget(self.weatherdata)
 
         weatherpage = QVBoxLayout()
-        weatherpage.addStretch(1)
-        btnWeather = QPushButton("날씨")
-        weatherpage.addWidget(btnWeather)
-        weatherpage.addStretch(3)
-        weatherpage.addLayout(weatherinfo)
-        weatherpage.addStretch(3)
-        btnWeather.clicked.connect(lambda :self.openPage("weather"))
+        weatherpage.addWidget(self.button3)
+        self.button3.clicked.connect(lambda :self.openPage("weather"))
 
         rightgrid = QVBoxLayout()
         rightgrid.addLayout(weatherpage)
@@ -197,24 +212,31 @@ class MyApp(QWidget):
             elif (pty == 2 or pty == 3): state = " 눈"
 
         cloudpic = QPixmap('images/cloud.png')
-        cloudpic = cloudpic.scaledToWidth(300)
+        cloudpic = cloudpic.scaled(500, 500, Qt.IgnoreAspectRatio)
         rainpic = QPixmap('images/rain.png')
-        rainpic = rainpic.scaledToWidth(300)
+        rainpic = rainpic.scaled(500, 500, Qt.IgnoreAspectRatio)
         snowpic = QPixmap('images/snow.png')
-        snowpic = snowpic.scaledToWidth(300)
+        snowpic = snowpic.scaled(500, 500, Qt.IgnoreAspectRatio)
         sunpic = QPixmap('images/sun.png')
-        sunpic = sunpic.scaledToWidth(300)
+        sunpic = sunpic.scaled(500, 500, Qt.IgnoreAspectRatio)
 
         if (state == "맑음"):
-            self.weatherpic.setPixmap(sunpic)
+            self.wthimage.setPixmap(sunpic)
+            self.wthicon.addPixmap(sunpic)
         elif (state == "흐림" or state == "구름많음"):
-            self.weatherpic.setPixmap(cloudpic)
+            self.wthimage.setPixmap(cloudpic)
+            self.wthicon.addPixmap(cloudpic)
         elif (state == "비"):
-            self.weatherpic.setPixmap(rainpic)
+            self.wthimage.setPixmap(rainpic)
+            self.wthicon.addPixmap(rainpic)
         elif (state == "눈"):
-            self.weatherpic.setPixmap(snowpic)
+            self.wthimage.setPixmap(snowpic)
+            self.wthicon.addPixmap(snowpic)
 
-        self.weatherdata.setText(tmp+"°C\n"+state)
+        self.button3.setText(tmp+"°C\n"+state)
+        font = QFont("Helvetica", 13)
+        font.setBold(True)
+        self.button3.setFont(font)
 
 
     def radio1_clicked(self, enabled):

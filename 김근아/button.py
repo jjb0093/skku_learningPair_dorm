@@ -1,4 +1,4 @@
-pixmap1 = QPixmap('delivery.png')  # 박스 아이콘 @ 택배조회 칸
+        pixmap1 = QPixmap('delivery.png')  # 박스 아이콘 @ 택배조회 칸
         pixmap1 = pixmap1.scaled(500, 500, Qt.IgnoreAspectRatio)
         boximage = QLabel()
         boximage.setPixmap(pixmap1)
