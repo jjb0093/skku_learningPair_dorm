@@ -12,7 +12,6 @@ class Weather(QWidget):
         self.initUI()
 
     def initUI(self):
-
         f = open("init.txt", 'r')
         campus = f.readlines()[0].replace("\n", "")
         result = weather_new.getWeather(campus)

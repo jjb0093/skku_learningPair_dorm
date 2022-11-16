@@ -20,8 +20,9 @@ def getWeather(loc):
 
     baseTime = '2300'
     baseDate = (date.today() - timedelta(1)).strftime("%Y%m%d")
+    skipCount = 0
 
-    if(now.hour >= 3 and now.minute > 10):
+    if(now.hour >= 3):
         baseDate = now.strftime("%Y%m%d")
         if((now.hour - 2) % 3 == 0):
             baseTime = str((now - timedelta(hours = 3)).strftime("%H00"))
@@ -33,6 +34,7 @@ def getWeather(loc):
     elif(now.hour == 2): skipCount = 3
 
     numOfRows += (skipCount + 1) * 12
+    print(baseTime, baseDate, skipCount, now.hour)
 
     nowHour = now.hour
 
@@ -45,6 +47,7 @@ def getWeather(loc):
     url += '&base_time=' + str(baseTime)
     url += '&nx=' + str(nx)
     url += '&ny=' + str(ny)
+    print(url)
 
     response = requests.get(url, verify = False)
     data = elt.fromstring(response.text)
@@ -57,7 +60,7 @@ def getWeather(loc):
     for i in range(7):
         details = {}
 
-        details["dayTime"] = str(data[1][1][start + (rotate_count * 12) + plus_count][2].text) + '-' + str(data[1][1][start + (rotate_count * 12) + plus_count][4].text)
+        details["dayTime"] = str(data[1][1][start + (rotate_count * 12) + plus_count][3].text) + '-' + str(data[1][1][start + (rotate_count * 12) + plus_count][4].text)
         details["sky"] = str(data[1][1][5 + start + (rotate_count * 12) + plus_count][5].text)
         details["tmp"] = str(data[1][1][0 + start + (rotate_count * 12) + plus_count][5].text)
         details["reh"] = str(data[1][1][10 + start + (rotate_count * 12) + plus_count][5].text)
