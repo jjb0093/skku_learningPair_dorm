@@ -47,7 +47,6 @@ def getWeather(loc):
         url += '&base_time=' + str(baseTime)
         url += '&nx=' + str(nx)
         url += '&ny=' + str(ny)
-        print(url)
 
         response = requests.get(url, verify = False)
         data = elt.fromstring(response.text)

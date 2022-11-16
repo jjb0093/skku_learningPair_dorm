@@ -5,6 +5,9 @@ from PyQt5.QtCore import Qt, QSize
 from modules import delivery
 
 class Delivery(QWidget):
+    f = open("init.txt", 'r')
+    lines = f.readlines()
+    f.close()
 
     companyList = ['CJ 대한통운', '우체국택배', '한진택배', '롯데택배', '로젠택배', '경동택배', 'CVSnet 편의점택배(GS25)', 'CU 편의점택배']
     companyNum = ['04', '01', '05', '08', '06', '23', '24', '46']
@@ -58,6 +61,14 @@ class Delivery(QWidget):
         for i in range(len(result[1])):
             text = result[1][i]
             self.tb.append("<p style='font-size: 20px'>" + str(text['timeString']) + " / " + str(text['trans_where']) + " / " + str(text['trans_kind']).replace("\n", "") + "</p>")
+        self.write(Delivery.companyNum[index], self.qle2.text())
+
+    def write(self, code, invoice):
+        print(code, invoice)
+        f = open("init.txt", 'w')
+        f.write(Delivery.lines[0] + "\n" + code + "\n" + invoice)
+        f.close()
+
 
 def show():
     app = QApplication(sys.argv)

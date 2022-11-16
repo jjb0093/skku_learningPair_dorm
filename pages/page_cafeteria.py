@@ -5,16 +5,13 @@ from PyQt5.QtCore import Qt, QSize
 from modules import cafeteria
 
 class Cafeteria(QWidget):
-    f = open("init.txt", 'r')
-    campus = f.read()
-    f.close()
-    print(campus)
 
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
+
         self.tb1 = QTextBrowser(self)
         self.tb1.setAcceptRichText(True)
         self.tb1.setOpenExternalLinks(True)
@@ -64,7 +61,10 @@ class Cafeteria(QWidget):
         button.setIcon(icon)
         button.setIconSize(QSize(30, 30))
 
-        result = cafeteria.getFood(Cafeteria.campus)
+        f = open("init.txt", 'r')
+        result = cafeteria.getFood(f.readlines()[0])
+        f.close()
+
         food = []
         for i in range(len(result)): food.append(result[i])
         for i in range(len(food[0].keys())):

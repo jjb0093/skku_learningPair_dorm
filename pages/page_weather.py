@@ -2,20 +2,21 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QDateTime, QSize, Qt
-from modules import weather as w
+from modules import weather
 
 
 class Weather(QWidget):
-    f = open("init.txt", 'r')
-    campus = f.read()
-    f.close()
 
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
-        result = w.getWeather(Weather.campus)
+
+        f = open("init.txt", 'r')
+        campus = f.readlines()[0]
+        result = weather.getWeather(campus)
+        f.close()
 
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
@@ -57,6 +58,8 @@ class Weather(QWidget):
         grid.addWidget(QLabel("습도: "), 2, 0)
         grid.addWidget(QLabel(), 3, 0)
         grid.addWidget(QLabel("강수확률: "), 4, 0)
+        grid.addWidget(QLabel(), 5, 0)
+        grid.addWidget(QLabel(campus), 6, 0)
 
         sky_now = int(result[0]['sky'])
         pty_now = int(result[0]['pty'])
