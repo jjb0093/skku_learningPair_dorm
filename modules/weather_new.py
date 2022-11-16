@@ -9,7 +9,7 @@ def getWeather(loc):
     now = datetime.now()
 
     serviceKey = "ya3j1ObxHL8p6TfZnHJZ9uGlUCexBZIbhJrzI%2FG9TYvVn3MwnQdL4j%2FROSg%2BJy2a4M%2F8etQYRfZMnqoeDPyjOw%3D%3D"
-    numOfRows = 72
+    numOfRows = 84
     pageNum = 1
     if(loc == "Seoul"):
         nx = 60
@@ -25,17 +25,16 @@ def getWeather(loc):
         baseDate = now.strftime("%Y%m%d")
         if((now.hour - 2) % 3 == 0):
             baseTime = str((now - timedelta(hours = 3)).strftime("%H00"))
-            pageNum = 3
+            skipCount = 3
         else:
             baseTime = str((now - timedelta(hours = ((now.hour - 2) % 3))).strftime("%H00"))
-            pageNum = int((now.hour - 2) % 3)
-    elif(now.hour == 1): pageNum = 2
-    elif(now.hour == 2): pageNum = 3
+            skipCount = int((now.hour - 2) % 3)
+    elif(now.hour == 1): skipCount = 2
+    elif(now.hour == 2): skipCount = 3
+
+    numOfRows += (skipCount + 1) * 12
 
     nowHour = now.hour
-
-    weatherDetails = []
-    count = 0
 
     url = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?'
     url += 'serviceKey=' + str(serviceKey)
@@ -46,11 +45,37 @@ def getWeather(loc):
     url += '&base_time=' + str(baseTime)
     url += '&nx=' + str(nx)
     url += '&ny=' + str(ny)
-    print(url)
 
     response = requests.get(url, verify = False)
     data = elt.fromstring(response.text)
 
+    weatherDetails = []
+    rotate_count = 0
+    plus_count = 0
+
+    start = (skipCount - 1) * 12
+    for i in range(7):
+        details = {}
+
+        details["dayTime"] = str(data[1][1][start + (rotate_count * 12) + plus_count][3].text) + '-' + str(data[1][1][start + (rotate_count * 12) + plus_count][4].text)
+        details["sky"] = str(data[1][1][5 + start + (rotate_count * 12) + plus_count][2].text)
+        details["tmp"] = str(data[1][1][0 + start + (rotate_count * 12) + plus_count][2].text)
+        details["reh"] = str(data[1][1][10 + start + (rotate_count * 12) + plus_count][2].text)
+        details["pop"] = str(data[1][1][7 + start + (rotate_count * 12) + plus_count][2].text)
+        details["pty"] = str(data[1][1][6 + start + (rotate_count * 12) + plus_count][2].text)
+
+        rotate_count += 1
+
+        if (nowHour == 23):
+            nowHour = 0
+        else:
+            nowHour += 1
+        if (nowHour == 7 or nowHour == 16): plus_count += 1
+
+        weatherDetails.append(details)
+
+    return weatherDetails
+    """
     details = {}
     for i in range(7):
         details["dayTime"] = str(data[1][1][5][3].text) + '-' + str(data[1][1][5][4].text)
@@ -68,3 +93,4 @@ def getWeather(loc):
         weatherDetails.append(details)
 
     return weatherDetails
+    """

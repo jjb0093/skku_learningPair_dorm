@@ -2,6 +2,8 @@ import requests
 import xml.etree.ElementTree as elt
 from datetime import datetime, timedelta, date
 import warnings
+import time
+start = time.time()
 
 warnings.filterwarnings('ignore')
 
@@ -47,7 +49,6 @@ def getWeather(loc):
         url += '&base_time=' + str(baseTime)
         url += '&nx=' + str(nx)
         url += '&ny=' + str(ny)
-        print(url)
 
         response = requests.get(url, verify = False)
         data = elt.fromstring(response.text)
