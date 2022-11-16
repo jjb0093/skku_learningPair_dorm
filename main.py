@@ -50,14 +50,13 @@ class MyApp(QWidget):
         self.button2.setIcon(icon)
         self.button2.setIconSize(QSize(150, 250))
 
-        pixmap3 = QPixmap('images/cloud.png')
-        pixmap3 = pixmap3.scaled(500, 500, Qt.IgnoreAspectRatio)
+        #pixmap3 = QPixmap('images/cloud.png')
+        #pixmap3 = pixmap3.scaled(500, 500, Qt.IgnoreAspectRatio)
 
         self.wthicon = QIcon()
         self.button3 = QPushButton(self)
-        self.button3.setIcon(self.wthicon)
-        self.button3.setIconSize(QSize(370, 350))
-
+        #self.button3.setIcon(self.wthicon)
+        #self.button3.setIconSize(QSize(370, 350))
 
         pixmap4 = QPixmap('images/skku.png')
         pixmap4 = pixmap4.scaled(40, 40, Qt.IgnoreAspectRatio)
@@ -150,8 +149,6 @@ class MyApp(QWidget):
         allgrid.addLayout(notice)
         allgrid.addLayout(rightgrid)
 
-        self.showWeather()
-
         self.setLayout(allgrid)
 
         self.setWindowTitle('Main')
@@ -193,6 +190,7 @@ class MyApp(QWidget):
         for i in range(len(result_notice[1]) - int(result_notice[0])):
             self.noticebody.append("<a href='" + url[MyApp.campus] + result_notice[1][i+2][5] + "' style='text-decoration: none;'>"
                                    "<p style='color: black;'>" + result_notice[1][i + 2][2] + "</p></a>")
+        MyApp.showWeather(self)
 
     def showWeather(self):
         result = weather.getNowWeather(MyApp.campus)
@@ -225,6 +223,8 @@ class MyApp(QWidget):
         elif (state == "흐림" or state == "구름많음"): self.wthicon.addPixmap(cloudpic)
         elif (state == "비"): self.wthicon.addPixmap(rainpic)
         elif (state == "눈"): self.wthicon.addPixmap(snowpic)
+        self.button3.setIcon(self.wthicon)
+        self.button3.setIconSize(QSize(370, 350))
 
         self.button3.setText(tmp+"°C\n"+state)
         font = QFont("Helvetica", 13)
