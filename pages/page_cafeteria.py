@@ -19,12 +19,12 @@ class Cafeteria(QWidget):
         image.move(0, 0)
         image.resize(800, 140)
 
-        todaysmeal = QLabel("오늘의급식", self)
+        todaysmeal = QLabel("오늘의 학식", self)
         font0 = todaysmeal.font()
         font0.setPointSize(30)
         font0.setBold(True)
         todaysmeal.setFont(font0)
-        todaysmeal.move(335, 60)
+        todaysmeal.move(300, 60)
         todaysmeal.setStyleSheet("Color : white")
 
 
