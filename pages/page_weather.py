@@ -22,6 +22,11 @@ class Weather(QWidget):
 
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
+        credit = QLabel("기상청, 『기상청_단기예보 조회서비스』, baseTime")
+        font1 = credit.font()
+        font1.setPointSize(10)
+        credit.setFont(font1)
+
         tableWidget = QTableWidget() # 표 세팅
         tableWidget.resize(200,600)
         tableWidget.setRowCount(4)
@@ -133,6 +138,7 @@ class Weather(QWidget):
         vbox.addLayout(hbox)
         vbox.addWidget(QLabel('시간별 날씨'))
         vbox.addWidget(tableWidget)
+        vbox.addWidget(credit)
         vbox.addStretch(2)
 
         self.setLayout(vbox)
