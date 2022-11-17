@@ -63,7 +63,7 @@ class Delivery(QWidget):
         self.tb.resize(740,400)
         self.tb.setStyleSheet('QTextBrowser {background-color: #FFFFFF; border-radius: 3px;}')
 
-        credit = QLabel("※ 본 정보는 스마트택배에서 제공 받는 정보로, 실제 배송 상황과 다를 수 있습니다.",self)
+        credit = QLabel("※ 본 정보는 스마트 택배에서 제공 받는 정보로, 실제 배송 상황과 다를 수 있습니다.",self)
         font1 = credit.font()
         font1.setPointSize(10)
         credit.setFont(font1)
