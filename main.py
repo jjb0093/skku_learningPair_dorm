@@ -241,10 +241,8 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     dir = QDir("fonts")
-    fontDB = QFontDatabase().addApplicationFont("fonts/AppleSDGothicNeoL.ttf")
+    fontDB = QFontDatabase().addApplicationFont("fonts/AppleSDGothicNeoL.ttf.ttf")
     print(QFontDatabase().applicationFontFamilies(fontDB))
-    #if(fontDB < 0): print("font not loaded")
-    #print(fontDB)
     app.setFont(QFont("AppleSDGothicNeoL00"))
 
     ex = MyApp()
