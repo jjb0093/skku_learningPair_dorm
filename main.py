@@ -21,8 +21,6 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
-        font = QFont("Helvetica", 13)
-        self.setFont(font)
 
     def initUI(self):
 
@@ -37,6 +35,7 @@ class MyApp(QWidget):
         self.button1.move(450, 470)
         self.button1.setIcon(iicon)
         self.button1.setIconSize(QSize(150, 250))
+        self.button1.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
         pixmap2 = QPixmap('images/food.png')  # 박스 아이콘 @ 택배조회 칸
         pixmap2 = pixmap2.scaled(500, 500, Qt.IgnoreAspectRatio)
@@ -49,6 +48,7 @@ class MyApp(QWidget):
         self.button2.move(670, 470)
         self.button2.setIcon(icon)
         self.button2.setIconSize(QSize(150, 250))
+        self.button2.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
         #pixmap3 = QPixmap('images/cloud.png')
         #pixmap3 = pixmap3.scaled(500, 500, Qt.IgnoreAspectRatio)
@@ -78,20 +78,6 @@ class MyApp(QWidget):
         postandfood.addLayout(postpage)
         postandfood.addLayout(foodpage)
 
-        self.weatherpic = QLabel()
-        self.weatherpic.resize(300, 300)
-
-        self.weatherdata = QLabel()
-        font1 = self.weatherdata.font()
-        font1.setPointSize(30)
-        font1.setFamily('Helvetica')
-        font1.setBold(True)
-        self.weatherdata.setFont(font1)
-
-        weatherinfo = QHBoxLayout()
-        weatherinfo.addWidget(self.weatherpic)
-        weatherinfo.addWidget(self.weatherdata)
-
         weatherpage = QVBoxLayout()
         weatherpage.addWidget(QLabel("날씨"))
         weatherpage.addWidget(self.button3)
@@ -107,7 +93,7 @@ class MyApp(QWidget):
 
         font2 = self.noticehead.font()
         font2.setPointSize(30)
-        font2.setFamily('Helvetica')
+        font2.setFamily('본고딕')
         font2.setBold(True)
 
         self.noticehead.setFont(font2)
@@ -121,6 +107,7 @@ class MyApp(QWidget):
         self.noticeSuwondata = QTextBrowser() # 여기에 수원 날씨 관련 자료 넣기
 
         self.noticebody = QTextBrowser()
+        self.noticebody.setStyleSheet('QTextBrowser {background-color: #FFFFFF; border-radius: 5px;}')
         self.noticebody.setOpenExternalLinks(True)
         MyApp.showNotice(self)
 
@@ -227,10 +214,11 @@ class MyApp(QWidget):
         self.button3.setIcon(self.wthicon)
         self.button3.setIconSize(QSize(370, 350))
 
-        self.button3.setText(tmp+"°C\n"+state)
-        font = QFont("Helvetica", 13)
-        font.setBold(True)
+        self.button3.setText(tmp+"°C\n \n"+state)
+        font = QFont("Helvetica", 30)
         self.button3.setFont(font)
+
+        self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
 
     def radio1_clicked(self, enabled):

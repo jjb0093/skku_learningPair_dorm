@@ -27,8 +27,7 @@ class MyApp(QWidget):
         self.btn1 = QPushButton(self)
         self.btn1.setText('조회')
         self.btn1.move(690,60)
-        self.btn1.resize(80,40)
-        self.btn1.setStyleSheet('QPushButton {background-color: #167023; color: white}')
+        self.btn1.setStyleSheet('QPushButton {background-color: #167023; color: white; border-radius: 3px;}')
 
         self.btn1.clicked.connect(self.btn1_clicked)
 

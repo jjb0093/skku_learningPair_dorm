@@ -32,6 +32,7 @@ class Delivery(QWidget):
         self.btn1.setText('조회')
         self.btn1.move(690,100)
         self.btn1.resize(80,40)
+        self.btn1.setStyleSheet('QPushButton {background-color: #167023; color: white; border-radius: 3px;}')
 
         self.btn1.clicked.connect(self.btn1_clicked)
 
