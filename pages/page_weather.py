@@ -26,7 +26,7 @@ class Weather(QWidget):
         tableWidget.resize(200,600)
         tableWidget.setRowCount(4)
         tableWidget.setColumnCount(6)
-        tableWidget.setStyleSheet('QTableWidget {background-color: #FFFFFF; color: black; border-radius: 5px;}')
+        tableWidget.setStyleSheet('QTableWidget {background-color: #FFFFFF; color: black; border-radius: 3px;}')
 
         tableWidget.setVerticalHeaderItem(0, QTableWidgetItem('날씨'))
         tableWidget.setVerticalHeaderItem(1, QTableWidgetItem('온도'))
