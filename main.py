@@ -11,11 +11,17 @@ class MyApp(QWidget):
     if (not os.path.isfile("init.txt")):
         campus = "Seoul"
         f = open("init.txt", 'w')
-        f.write("Seoul")
+        f.write("Seoul\n04\n1234")
         f.close()
+        isDelivery = False
     else:
         f = open("init.txt", 'r')
-        campus = f.readlines()[0].replace("\n","")
+        lines = f.readlines()
+        campus = lines[0].replace("\n","")
+        if(lines[1] != None):
+            delivery = [lines[1], lines[2]]
+            isDelivery = True
+        else: isDelivery = False
         f.close()
 
     def __init__(self):
@@ -216,12 +222,10 @@ class MyApp(QWidget):
             self.noticehead.setText('인문사회과학캠퍼스')
             self.noticebody.setLayout(self.noticeSeoulbody)
             MyApp.campus = "Seoul"
-            f = open("init.txt", 'r')
-            lines = f.readlines()
-            f.close()
             f = open("init.txt", 'w')
-            f.write("Seoul\n" + lines[1] + lines[2])
-            f.close
+            if(self.isDelivery): f.write("Seoul\n" + self.delivery[0] + self.delivery[1])
+            else: f.write("Seoul")
+            f.close()
             MyApp.showNotice(self)
 
     def radio2_clicked(self, enabled):
@@ -229,12 +233,10 @@ class MyApp(QWidget):
             self.noticehead.setText('자연과학캠퍼스')
             self.noticebody.setLayout(self.noticeSuwonbody)
             MyApp.campus = "Suwon"
-            f = open("init.txt", 'r')
-            lines = f.readlines()
-            f.close()
             f = open("init.txt", 'w')
-            f.write("Suwon\n" + lines[1] + lines[2])
-            f.close
+            if (self.isDelivery): f.write("Suwon\n" + self.delivery[0] + self.delivery[1])
+            else: f.write("Suwon")
+            f.close()
             MyApp.showNotice(self)
 
 if __name__ == '__main__':
