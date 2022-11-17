@@ -10,6 +10,8 @@ class Weather(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        font = QFont("fonts/Helvetica Light.ttf", 15)
+        self.setFont(font)
 
     def initUI(self):
         f = open("init.txt", 'r')
@@ -24,6 +26,7 @@ class Weather(QWidget):
         tableWidget.resize(200,600)
         tableWidget.setRowCount(4)
         tableWidget.setColumnCount(6)
+        tableWidget.setStyleSheet('QTableWidget {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
         tableWidget.setVerticalHeaderItem(0, QTableWidgetItem('날씨'))
         tableWidget.setVerticalHeaderItem(1, QTableWidgetItem('온도'))
@@ -53,13 +56,20 @@ class Weather(QWidget):
 
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
-        grid.addWidget(QLabel("온도: "), 0, 0)
+        nowweather = QLabel("현재 날씨: ")
+        font1 = nowweather.font()
+        font1.setPointSize(30)
+        font1.setFamily('fonts/Helvetica Bold.ttf')
+        nowweather.setFont(font1)
+        grid.addWidget(nowweather, 0, 0)
         grid.addWidget(QLabel(), 1, 0)
-        grid.addWidget(QLabel("습도: "), 2, 0)
+        grid.addWidget(QLabel("온도: "), 2, 0)
         grid.addWidget(QLabel(), 3, 0)
-        grid.addWidget(QLabel("강수확률: "), 4, 0)
+        grid.addWidget(QLabel("습도: "), 4, 0)
         grid.addWidget(QLabel(), 5, 0)
-        grid.addWidget(QLabel(campus), 6, 0)
+        grid.addWidget(QLabel("강수확률: "), 6, 0)
+        grid.addWidget(QLabel(), 7, 0)
+        grid.addWidget(QLabel(campus), 8, 0)
 
         sky_now = int(result[0]['sky'])
         pty_now = int(result[0]['pty'])
@@ -71,11 +81,18 @@ class Weather(QWidget):
             elif (pty_now == 1 or pty_now == 4): state = "비"
             elif (pty_now == 2 or pty_now == 3): state = " 눈"
 
-        grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 0, 1) # 현재 온도 자료
+        nowweatherstatus = QLabel(state)
+        font2 = nowweatherstatus.font()
+        font2.setPointSize(30)
+        font2.setFamily('fonts/Helvetica Bold.ttf')
+        nowweatherstatus.setFont(font2)
+        grid.addWidget(nowweatherstatus, 0, 1)
         grid.addWidget(QLabel(), 1, 1)
-        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 2, 1) # 현재 습도 자료
+        grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 2, 1) # 현재 온도 자료
         grid.addWidget(QLabel(), 3, 1)
-        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 4, 1) # 현재 강수확률 자료
+        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 4, 1) # 현재 습도 자료
+        grid.addWidget(QLabel(), 5, 1)
+        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 6, 1) # 현재 강수확률 자료
 
         gridbox = QVBoxLayout()
         gridbox.addStretch(1)
@@ -109,7 +126,7 @@ class Weather(QWidget):
         hbox.addLayout(photobox)
         hbox.addStretch(1)
         hbox.addLayout(gridbox)
-        hbox.addStretch(3)
+        hbox.addStretch(2)
 
         vbox = QVBoxLayout() #hbox와 시간별 날씨 표시
         vbox.addStretch(7)
