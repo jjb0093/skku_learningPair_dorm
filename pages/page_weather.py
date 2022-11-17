@@ -91,7 +91,7 @@ class Weather(QWidget):
         font2.setPointSize(30)
         font2.setFamily('fonts/Helvetica Bold.ttf')
         nowweatherstatus.setFont(font2)
-        grid.addWidget(nowweatherstatus, 0, 1)
+        grid.addWidget(nowweatherstatus, 0, 2)
         grid.addWidget(QLabel(), 1, 1)
         grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 2, 1) # 현재 온도 자료
         grid.addWidget(QLabel(), 3, 1)
