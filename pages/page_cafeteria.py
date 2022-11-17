@@ -91,6 +91,7 @@ class Cafeteria(QWidget):
         self.setWindowTitle('FOOD')
         self.setGeometry(300, 300, 800, 600)
         self.show()
+        #
 
 def show():
     app = QApplication(sys.argv)
