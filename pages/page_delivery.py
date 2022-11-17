@@ -21,9 +21,9 @@ class Delivery(QWidget):
 
         head = QLabel("택배 조회", self)
         head.move(33, 30)
-        head.resize(150, 30)
+        head.resize(150, 20)
         font1 = head.font()
-        font1.setPointSize(30)
+        font1.setPointSize(20)
         font1.setBold(True)
         head.setFont(font1)
 

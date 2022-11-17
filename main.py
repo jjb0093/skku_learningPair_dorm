@@ -211,9 +211,11 @@ class MyApp(QWidget):
         elif (state == "눈"): self.wthicon.addPixmap(snowpic)
         self.button3.setIcon(self.wthicon)
         self.button3.setIconSize(QSize(370, 350))
-
-        self.button3.setText(tmp+"°C\n \n"+state)
-
+        self.button3.setText(tmp+"°C\n"+state)
+        font2 = self.button3.font()
+        font2.setPointSize(25)
+        font2.setBold(True)
+        self.button3.setFont(font2)
         self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
 
