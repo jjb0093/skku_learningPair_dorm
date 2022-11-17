@@ -20,7 +20,7 @@ class Weather(QWidget):
 
         time = QDateTime.currentDateTime() #시간 및 날짜 세팅
 
-        credit = QLabel("기상청, 『기상청_단기예보 조회서비스』, baseTime")
+        credit = QLabel("기상청, 『기상청_단기예보 조회서비스』, " + result[7])
         font1 = credit.font()
         font1.setPointSize(10)
         credit.setFont(font1)

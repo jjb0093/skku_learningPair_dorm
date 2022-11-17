@@ -12,21 +12,15 @@ class Cafeteria(QWidget):
 
     def initUI(self):
 
-        pixmap = QPixmap("images/pink.jpg")
-        pixmap.scaled(800, 140, Qt.IgnoreAspectRatio)
-        image = QLabel(self)
-        image.setPixmap(pixmap)
-        image.move(0, 0)
-        image.resize(800, 140)
-
         todaysmeal = QLabel("오늘의 학식", self)
         font0 = todaysmeal.font()
         font0.setPointSize(30)
         font0.setBold(True)
         todaysmeal.setFont(font0)
-        todaysmeal.move(300, 60)
-        todaysmeal.setStyleSheet("Color : white")
+        todaysmeal.move(50, 20)
 
+        epn = QLabel("오늘의 기숙사 학식을 확인하세요!", self)
+        epn.move(50, 100)
 
         self.tb1 = QTextBrowser(self)
         self.tb1.setAcceptRichText(True)
@@ -50,21 +44,21 @@ class Cafeteria(QWidget):
         self.tb3.setStyleSheet('QTextBrowser {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
         lb1 = QLabel('아침', self)
-        lb1.move(135, 150)
+        lb1.move(135, 140)
         font1 = lb1.font()
         font1.setPointSize(15)
         font1.setBold(True)
         lb1.setFont(font1)
 
         lb2 = QLabel('점심', self)
-        lb2.move(385, 150)
+        lb2.move(385, 140)
         font2 = lb2.font()
         font2.setPointSize(15)
         font2.setBold(True)
         lb2.setFont(font2)
 
         lb3 = QLabel('저녁', self)
-        lb3.move(635, 150)
+        lb3.move(635, 140)
         font3 = lb3.font()
         font3.setPointSize(15)
         font3.setBold(True)
@@ -80,18 +74,16 @@ class Cafeteria(QWidget):
         for i in range(len(food[0].keys())):
             self.tb1.append("<span style='font-size: 20px; font-weight: 800'>" + list(food[0].keys())[i] + "</span>")
             self.tb1.append("<span style='font-size: 16px'>" + str(list(food[0].values())[i]).replace(',', "\n") + "</span>")
-            self.tb1.append("\n")
         for i in range(len(food[1].keys())):
             self.tb2.append("<span style='font-size: 20px; font-weight: 800'>" + list(food[1].keys())[i] + "</span>")
-            self.tb2.append("<span style='font-size: 16px'>" + str(list(food[1].values())[i]).replace(',', "\n") + "</span><br><br>")
+            self.tb2.append("<span style='font-size: 16px'>" + str(list(food[1].values())[i]).replace(',', "\n") + "</span><br>")
         for i in range(len(food[2].keys())):
             self.tb3.append("<span style='font-size: 20px; font-weight: 800'>" + list(food[2].keys())[i] + "</span>")
-            self.tb3.append("<span style='font-size: 16px'>" + str(list(food[2].values())[i]).replace(',', "\n") + "</span><br><br>")
+            self.tb3.append("<span style='font-size: 16px'>" + str(list(food[2].values())[i]).replace(',', "\n") + "</span><br>")
 
         self.setWindowTitle('FOOD')
         self.setGeometry(300, 300, 800, 600)
         self.show()
-        #
 
 def show():
     app = QApplication(sys.argv)

@@ -5,11 +5,10 @@ def getDelivery(code, invoice):
     #code = "04"
     #invoice = "566223490280"
 
-    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=7r7oaKc5c22PTh3FgFIB6Q&t_code='+ str(code) + '&t_invoice=' + str(invoice)
+    url = 'https://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=BBiZ6d7JKFfUKACipNl06g&t_code='+ str(code) + '&t_invoice=' + str(invoice)
     data = json.loads(requests.get(url).text)
 
     info = {}
-
     info["complete"] = data['complete']
     #info["invoice_no"] = data['invoiceNo']
     info["item_name"] = data['itemName']
@@ -30,6 +29,7 @@ def getDelivery(code, invoice):
         trackingDetails.append(details)
 
     return info, trackingDetails
+
 
     """
     dict_items(
