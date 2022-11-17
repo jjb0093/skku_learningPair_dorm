@@ -241,9 +241,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     dir = QDir("fonts")
-    fontDB = QFontDatabase().addApplicationFont("fonts/AppleSDGothicNeoL.ttf")
+    fontDB = QFontDatabase().addApplicationFont("fonts/testFont.ttf")
     print(QFontDatabase().applicationFontFamilies(fontDB))
-    app.setFont(QFont("AppleSDGothicNeoL00"))
+    app.setFont(QFont("KBIZgo L"))
 
     ex = MyApp()
     sys.exit(app.exec_())

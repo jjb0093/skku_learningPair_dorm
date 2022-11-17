@@ -73,6 +73,7 @@ def getWeather(loc):
         if (nowHour == 7 or nowHour == 16): plus_count += 1
 
         weatherDetails.append(details)
+    weatherDetails.append(baseDate + "-"  + baseTime)
 
     return weatherDetails
 
