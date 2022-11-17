@@ -21,23 +21,23 @@ class Delivery(QWidget):
 
         head = QLabel("택배 조회", self)
         head.move(33, 30)
-        head.resize(90, 20)
+        head.resize(150, 30)
         font1 = head.font()
-        font1.setPointSize(20)
+        font1.setPointSize(30)
         font1.setBold(True)
         head.setFont(font1)
 
         help = QLabel("택배사를 선택하고 운송장 번호를 입력하세요.", self)
         help.move(33,70)
         help.resize(300,30)
-        """
+
         pixmap1 = QPixmap('images/box.png')  # 박스 아이콘 @ 택배조회 칸
         pixmap1 = pixmap1.scaled(30, 30, Qt.IgnoreAspectRatio)
         boximage = QLabel(self)
         boximage.move(163, 30)
         boximage.resize(30, 30)
         boximage.setPixmap(pixmap1)
-        """
+
         self.cb = QComboBox(self)
         for i in range(len(Delivery.companyList)):
             self.cb.addItem(Delivery.companyList[i])
