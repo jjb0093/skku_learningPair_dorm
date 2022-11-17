@@ -10,8 +10,6 @@ class Weather(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
-        font = QFont("fonts/Helvetica Light.ttf", 15)
-        self.setFont(font)
 
     def initUI(self):
         f = open("init.txt", 'r')
@@ -59,22 +57,17 @@ class Weather(QWidget):
             for k in range(6):
                 tableWidget.setItem(i, k, QTableWidgetItem(str(list(result[k+1].values())[i+1])+signs[i-1]))
 
-
         grid = QGridLayout() # 온,습,강 나타내는 그리드
         nowweather = QLabel("현재 날씨: ")
-        font1 = nowweather.font()
-        font1.setPointSize(30)
-        font1.setFamily('fonts/Helvetica Bold.ttf')
-        nowweather.setFont(font1)
         grid.addWidget(nowweather, 0, 0)
-        grid.addWidget(QLabel(), 1, 0)
-        grid.addWidget(QLabel("온도: "), 2, 0)
-        grid.addWidget(QLabel(), 3, 0)
-        grid.addWidget(QLabel("습도: "), 4, 0)
-        grid.addWidget(QLabel(), 5, 0)
-        grid.addWidget(QLabel("강수확률: "), 6, 0)
-        grid.addWidget(QLabel(), 7, 0)
-        grid.addWidget(QLabel(campus), 8, 0)
+        #grid.addWidget(QLabel(), 1, 0)
+        grid.addWidget(QLabel("온도: "), 1, 0)
+        #grid.addWidget(QLabel(), 3, 0)
+        grid.addWidget(QLabel("습도: "), 2, 0)
+        #grid.addWidget(QLabel(), 5, 0)
+        grid.addWidget(QLabel("강수확률: "), 3, 0)
+        #grid.addWidget(QLabel(), 7, 0)
+        grid.addWidget(QLabel(campus), 4, 0)
 
         sky_now = int(result[0]['sky'])
         pty_now = int(result[0]['pty'])
@@ -87,17 +80,13 @@ class Weather(QWidget):
             elif (pty_now == 2 or pty_now == 3): state = " 눈"
 
         nowweatherstatus = QLabel(state)
-        font2 = nowweatherstatus.font()
-        font2.setPointSize(30)
-        font2.setFamily('fonts/Helvetica Bold.ttf')
-        nowweatherstatus.setFont(font2)
         grid.addWidget(nowweatherstatus, 0, 1)
-        grid.addWidget(QLabel(), 1, 1)
-        grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 2, 1) # 현재 온도 자료
-        grid.addWidget(QLabel(), 3, 1)
-        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 4, 1) # 현재 습도 자료
-        grid.addWidget(QLabel(), 5, 1)
-        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 6, 1) # 현재 강수확률 자료
+        #grid.addWidget(QLabel(), 1, 1)
+        grid.addWidget(QLabel(str(result[0]['tmp'])+"°C"), 1, 1) # 현재 온도 자료
+        #grid.addWidget(QLabel(), 3, 1)
+        grid.addWidget(QLabel(str(result[0]['reh'])+"%"), 2, 1) # 현재 습도 자료
+        #grid.addWidget(QLabel(), 5, 1)
+        grid.addWidget(QLabel(str(result[0]['pop'])+"%"), 3, 1) # 현재 강수확률 자료
 
         gridbox = QVBoxLayout()
         gridbox.addStretch(1)
