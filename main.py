@@ -21,8 +21,6 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
-        font = QFont("fonts/Helvetica Black.ttf", 13)
-        self.setFont(font)
 
     def initUI(self):
 
@@ -250,6 +248,11 @@ class MyApp(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+
+    fontDB = QFontDatabase()
+    fontDB.addApplicationFont("fonts/HelveticaBlack.ttf")
+    app.setFont(QFont("HelveticaBlack"))
+
     ex = MyApp()
     sys.exit(app.exec_())
 
