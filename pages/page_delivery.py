@@ -29,7 +29,7 @@ class Delivery(QWidget):
 
         help = QLabel("택배사를 선택하고 운송장 번호를 입력하세요.", self)
         help.move(33,70)
-        help.resize(300,30)
+        help.resize(300, 30)
 
         pixmap1 = QPixmap('images/box.png')  # 박스 아이콘 @ 택배조회 칸
         pixmap1 = pixmap1.scaled(30, 30, Qt.IgnoreAspectRatio)
