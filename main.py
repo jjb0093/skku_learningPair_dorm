@@ -3,7 +3,7 @@ import os
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt, QSize, QDir
 from modules import dorm, weather
 
 class MyApp(QWidget):
@@ -50,13 +50,8 @@ class MyApp(QWidget):
         self.button2.setIconSize(QSize(150, 250))
         self.button2.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
-        #pixmap3 = QPixmap('images/cloud.png')
-        #pixmap3 = pixmap3.scaled(500, 500, Qt.IgnoreAspectRatio)
-
         self.wthicon = QIcon()
         self.button3 = QPushButton(self)
-        #self.button3.setIcon(self.wthicon)
-        #self.button3.setIconSize(QSize(370, 350))
 
         pixmap4 = QPixmap('images/skku.png')
         pixmap4 = pixmap4.scaled(40, 40, Qt.IgnoreAspectRatio)
@@ -93,8 +88,6 @@ class MyApp(QWidget):
 
         font2 = self.noticehead.font()
         font2.setPointSize(30)
-        font2.setFamily("fonts/Helvetica Bold.ttf")
-
         self.noticehead.setFont(font2)
 
         gongji = QLabel("공지사항")
@@ -214,8 +207,6 @@ class MyApp(QWidget):
         self.button3.setIconSize(QSize(370, 350))
 
         self.button3.setText(tmp+"°C\n \n"+state)
-        font = QFont("fonts/Helvetica Bold.ttf", 30)
-        self.button3.setFont(font)
 
         self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
@@ -249,9 +240,12 @@ class MyApp(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    fontDB = QFontDatabase()
-    fontDB.addApplicationFont("fonts/HelveticaBlack.ttf")
-    app.setFont(QFont("HelveticaBlack"))
+    dir = QDir("fonts")
+    fontDB = QFontDatabase().addApplicationFont("fonts/AppleSDGothicNeoL.ttf")
+    print(QFontDatabase().applicationFontFamilies(fontDB))
+    #if(fontDB < 0): print("font not loaded")
+    #print(fontDB)
+    app.setFont(QFont("AppleSDGothicNeoL00"))
 
     ex = MyApp()
     sys.exit(app.exec_())
