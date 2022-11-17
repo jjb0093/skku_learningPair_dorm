@@ -21,6 +21,8 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        font = QFont("fonts/Helvetica Black.ttf", 13)
+        self.setFont(font)
 
     def initUI(self):
 
@@ -93,8 +95,7 @@ class MyApp(QWidget):
 
         font2 = self.noticehead.font()
         font2.setPointSize(30)
-        font2.setFamily('본고딕')
-        font2.setBold(True)
+        font2.setFamily("fonts/Helvetica Bold.ttf")
 
         self.noticehead.setFont(font2)
 
@@ -215,7 +216,7 @@ class MyApp(QWidget):
         self.button3.setIconSize(QSize(370, 350))
 
         self.button3.setText(tmp+"°C\n \n"+state)
-        font = QFont("Helvetica", 30)
+        font = QFont("fonts/Helvetica Bold.ttf", 30)
         self.button3.setFont(font)
 
         self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
