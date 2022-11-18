@@ -45,6 +45,7 @@ def getWeather(loc):
     url += '&base_time=' + str(baseTime)
     url += '&nx=' + str(nx)
     url += '&ny=' + str(ny)
+    print(url)
 
     response = requests.get(url, verify = False)
     data = elt.fromstring(response.text)
@@ -115,7 +116,6 @@ def getNowWeather(loc):
     url += '&base_time=' + str(baseTime)
     url += '&nx=' + str(nx)
     url += '&ny=' + str(ny)
-    print(url)
 
     response = requests.get(url, verify=False)
     data = elt.fromstring(response.text)
@@ -124,8 +124,8 @@ def getNowWeather(loc):
     details["dayTime"] = str(data[1][1][5][3].text) + '-' + str(data[1][1][5][4].text)
     details["sky"] = data[1][1][5][5].text
     details["tmp"] = data[1][1][0][5].text
-    details["reh"] = data[1][1][10][5].text
-    details["pop"] = data[1][1][7][5].text
+    #details["reh"] = data[1][1][10][5].text
+    #details["pop"] = data[1][1][7][5].text
     details["pty"] = data[1][1][6][5].text
 
     weatherDetails.append(details)

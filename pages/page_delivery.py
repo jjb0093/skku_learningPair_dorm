@@ -55,11 +55,13 @@ class Delivery(QWidget):
     def btn1_clicked(self):
         index = Delivery.companyList.index(self.cb.currentText())
         result = delivery.getDelivery(Delivery.companyNum[index], self.qle2.text())
-        self.tb.setText("<span style='font-size: 20px; font-weight: 600'>" + str(result[0]['item_name']) + " </span><span style='font-size: 20px; font-weight: 600; color: red;'>(" + ("배송 완료" if(result[0]['complete'] == True) else "배송 중") + ")</span><hr>")
-        for i in range(len(result[1])):
-            text = result[1][i]
-            self.tb.append("<p style='font-size: 20px'>" + str(text['timeString']) + " / " + str(text['trans_where']) + " / " + str(text['trans_kind']).replace("\n", "") + "</p>")
-        self.write(Delivery.companyNum[index], self.qle2.text())
+        if(result == "ERROR"): self.tb.setText("<span style='font-size: 20px; color: red;'>배송 정보가 조회되지 않았습니다. 택배사와 운송장 번호를 다시 확인해주세요.</span>")
+        else:
+            self.tb.setText("<span style='font-size: 20px; font-weight: 600'>" + str(result[0]['item_name']) + " </span><span style='font-size: 20px; font-weight: 600; color: red;'>(" + ("배송 완료" if(result[0]['complete'] == True) else "배송 중") + ")</span><hr>")
+            for i in range(len(result[1])):
+                text = result[1][i]
+                self.tb.append("<p style='font-size: 20px'>" + str(text['timeString']) + " / " + str(text['trans_where']) + " / " + str(text['trans_kind']).replace("\n", "") + "</p>")
+            self.write(Delivery.companyNum[index], self.qle2.text())
     def write(self, code, invoice):
         print(code, invoice)
         f = open("init.txt", 'w')

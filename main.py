@@ -18,7 +18,7 @@ class MyApp(QWidget):
         f = open("init.txt", 'r')
         lines = f.readlines()
         campus = lines[0].replace("\n","")
-        if(lines[1] != None):
+        if(len(lines) >= 2):
             delivery = [lines[1], lines[2]]
             isDelivery = True
         else: isDelivery = False
@@ -184,8 +184,8 @@ class MyApp(QWidget):
         sky = int(result[0]['sky'])
         pty = int(result[0]['pty'])
         tmp = result[0]['tmp']
-        reh = result[0]['reh']
-        pop = result[0]['pop']
+        #reh = result[0]['reh']
+        #pop = result[0]['pop']
 
         if (sky == 1): state = "맑음"
         else:
@@ -246,7 +246,7 @@ if __name__ == '__main__':
 
     dir = QDir("fonts")
     fontDB = QFontDatabase().addApplicationFont("fonts/testFont.ttf")
-    print(QFontDatabase().applicationFontFamilies(fontDB))
+    #print(QFontDatabase().applicationFontFamilies(fontDB))
     app.setFont(QFont("KBIZgo L"))
 
     ex = MyApp()
