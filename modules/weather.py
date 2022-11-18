@@ -45,7 +45,6 @@ def getWeather(loc):
     url += '&base_time=' + str(baseTime)
     url += '&nx=' + str(nx)
     url += '&ny=' + str(ny)
-    print(url)
 
     response = requests.get(url, verify = False)
     data = elt.fromstring(response.text)
@@ -67,10 +66,8 @@ def getWeather(loc):
 
         rotate_count += 1
 
-        if (nowHour == 23):
-            nowHour = 0
-        else:
-            nowHour += 1
+        if (nowHour == 23): nowHour = 0
+        else: nowHour += 1
         if (nowHour == 7 or nowHour == 16): plus_count += 1
 
         weatherDetails.append(details)
@@ -116,6 +113,7 @@ def getNowWeather(loc):
     url += '&base_time=' + str(baseTime)
     url += '&nx=' + str(nx)
     url += '&ny=' + str(ny)
+    print(url)
 
     response = requests.get(url, verify=False)
     data = elt.fromstring(response.text)

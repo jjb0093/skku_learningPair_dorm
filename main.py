@@ -11,7 +11,7 @@ class MyApp(QWidget):
     if (not os.path.isfile("init.txt")):
         campus = "Seoul"
         f = open("init.txt", 'w')
-        f.write("Seoul\n04\n1234")
+        f.write("Seoul")
         f.close()
         isDelivery = False
     else:
