@@ -122,9 +122,9 @@ class MyApp(QWidget):
 
         headandbutton = QGridLayout()
         headandbutton.addWidget(skkuimage, 0, 0)
-        headandbutton.addWidget(self.noticehead, 0, 2)
-        headandbutton.addWidget(gongji, 3, 0)
-        headandbutton.addLayout(radiobox, 3, 6)
+        headandbutton.addWidget(self.noticehead, 0, 1)
+        headandbutton.addWidget(QLabel("공지사항"), 1, 0)
+        headandbutton.addLayout(radiobox, 1, 2)
 
         notice = QVBoxLayout()
         notice.addLayout(headandbutton)
