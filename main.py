@@ -211,7 +211,10 @@ class MyApp(QWidget):
         self.button3.setIcon(self.wthicon)
         self.button3.setIconSize(QSize(370, 350))
 
-        self.button3.setText(tmp+"°C\n \n"+state)
+        self.button3.setText(tmp+"°C\n"+state)
+        font3 = self.button3.font()
+        font3.setPointSize(35)
+        self.button3.setFont(font3)
 
         self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
