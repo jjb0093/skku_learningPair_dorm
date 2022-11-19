@@ -56,12 +56,17 @@ class Delivery(QWidget):
         self.tb.setOpenExternalLinks(True)
         self.tb.setStyleSheet('QTextBrowser {background-color: #FFFFFF; border-radius: 3px;}')
 
+        credit = QLabel("본 정보는 스마트택배에서 제공받는 정보로, 실제 배송상황과 다를 수 있습니다.")
+        font1 = credit.font()
+        font1.setPointSize(10)
+        credit.setFont(font1)
+
         oklayout = QVBoxLayout()
         oklayout.addWidget(head)
         oklayout.addWidget(help)
         oklayout.addLayout(browser)
         oklayout.addWidget(self.tb)
-        oklayout.addWidget(QLabel("본 정보는 스마트택배에서 제공받는 정보로, 실제 배송상황과 다를 수 있습니다."))
+        oklayout.addWidget(credit)
 
         blank = QHBoxLayout()
         blank.addStretch(1)
