@@ -60,10 +60,10 @@ class MyApp(QWidget):
         self.button3 = QPushButton(self)
 
         pixmap4 = QPixmap('images/skku.png')
-        pixmap4 = pixmap4.scaled(40, 40, Qt.IgnoreAspectRatio)
+        pixmap4 = pixmap4.scaled(50, 50, Qt.IgnoreAspectRatio)
         skkuimage = QLabel()
         skkuimage.setPixmap(pixmap4)
-        skkuimage.resize(40, 40)
+        skkuimage.setFixedSize(50, 50)
 
         postpage = QVBoxLayout()
         postpage.addWidget(QLabel("택배조회"))
