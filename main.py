@@ -26,6 +26,7 @@ class MyApp(QWidget):
         self.setAutoFillBackground(True)
         self.setPalette(pal)
         self.setStyleSheet('QLabel {color: white;}')
+        self.setStyleSheet('QRadioButton {color: white;}')
 
     def initUI(self):
 
