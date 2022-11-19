@@ -32,8 +32,6 @@ class MyApp(QWidget):
 
         pixmap1 = QPixmap('images/delivery.png')  # 박스 아이콘 @ 택배조회 칸
         pixmap1 = pixmap1.scaled(500, 500, Qt.IgnoreAspectRatio)
-        boximage = QLabel()
-        boximage.setPixmap(pixmap1)
 
         iicon = QIcon()
         iicon.addPixmap(pixmap1)
@@ -45,8 +43,6 @@ class MyApp(QWidget):
 
         pixmap2 = QPixmap('images/food.png')  # 박스 아이콘 @ 택배조회 칸
         pixmap2 = pixmap2.scaled(500, 500, Qt.IgnoreAspectRatio)
-        foodimage = QLabel()
-        foodimage.setPixmap(pixmap2)
 
         icon = QIcon()
         icon.addPixmap(pixmap2)
