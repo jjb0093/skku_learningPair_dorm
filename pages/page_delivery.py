@@ -61,6 +61,7 @@ class Delivery(QWidget):
         oklayout.addWidget(help)
         oklayout.addLayout(browser)
         oklayout.addWidget(self.tb)
+        oklayout.addWidget(QLabel("본 정보는 스마트택배에서 제공받는 정보로, 실제 배송상황과 다를 수 있습니다."))
 
         blank = QHBoxLayout()
         blank.addStretch(1)
