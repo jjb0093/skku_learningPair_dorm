@@ -17,6 +17,7 @@ class Delivery(QWidget):
         pal.setColor(QPalette.Background, QColor(46, 78, 63))
         self.setAutoFillBackground(True)
         self.setPalette(pal)
+        self.setStyleSheet('QLabel {color: white;}')
 
     def initUI(self):
 
@@ -61,7 +62,12 @@ class Delivery(QWidget):
         oklayout.addLayout(browser)
         oklayout.addWidget(self.tb)
 
-        self.setLayout(oklayout)
+        blank = QHBoxLayout()
+        blank.addStretch(1)
+        blank.addLayout(oklayout)
+        blank.addStretch(1)
+
+        self.setLayout(blank)
 
         self.setWindowTitle('POST')
         self.setGeometry(300, 300, 800, 600)

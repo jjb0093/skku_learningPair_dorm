@@ -25,6 +25,7 @@ class MyApp(QWidget):
         pal.setColor(QPalette.Background, QColor(46, 78, 63))
         self.setAutoFillBackground(True)
         self.setPalette(pal)
+        self.setStyleSheet('QLabel {color: white;}')
 
     def initUI(self):
 
