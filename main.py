@@ -213,7 +213,7 @@ class MyApp(QWidget):
 
         self.button3.setText(tmp+"°C\n"+state)
         font3 = self.button3.font()
-        font3.setPointSize(35)
+        font3.setPointSize(25)
         self.button3.setFont(font3)
 
         self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
@@ -224,11 +224,8 @@ class MyApp(QWidget):
             self.noticehead.setText('인문사회과학캠퍼스')
             self.noticebody.setLayout(self.noticeSeoulbody)
             MyApp.campus = "Seoul"
-            f = open("init.txt", 'r')
-            lines = f.readlines()
-            f.close()
             f = open("init.txt", 'w')
-            f.write("Seoul\n" + lines[1] + lines[2])
+            f.write("Seoul")
             f.close
             MyApp.showNotice(self)
 
@@ -237,11 +234,8 @@ class MyApp(QWidget):
             self.noticehead.setText('자연과학캠퍼스')
             self.noticebody.setLayout(self.noticeSuwonbody)
             MyApp.campus = "Suwon"
-            f = open("init.txt", 'r')
-            lines = f.readlines()
-            f.close()
             f = open("init.txt", 'w')
-            f.write("Suwon\n" + lines[1] + lines[2])
+            f.write("Suwon")
             f.close
             MyApp.showNotice(self)
 
