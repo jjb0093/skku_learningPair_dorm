@@ -13,20 +13,18 @@ class MyApp(QWidget):
         f = open("init.txt", 'w')
         f.write("Seoul")
         f.close()
-        isDelivery = False
     else:
         f = open("init.txt", 'r')
-        lines = f.readlines()
-        campus = lines[0].replace("\n","")
-        if(len(lines) >= 2):
-            delivery = [lines[1], lines[2]]
-            isDelivery = True
-        else: isDelivery = False
+        campus = f.readlines()[0].replace("\n","")
         f.close()
 
     def __init__(self):
         super().__init__()
         self.initUI()
+        pal = QPalette()
+        pal.setColor(QPalette.Background, QColor(46, 78, 63))
+        self.setAutoFillBackground(True)
+        self.setPalette(pal)
 
     def initUI(self):
 
@@ -211,11 +209,9 @@ class MyApp(QWidget):
         elif (state == "눈"): self.wthicon.addPixmap(snowpic)
         self.button3.setIcon(self.wthicon)
         self.button3.setIconSize(QSize(370, 350))
-        self.button3.setText(tmp+"°C\n"+state)
-        font2 = self.button3.font()
-        font2.setPointSize(25)
-        font2.setBold(True)
-        self.button3.setFont(font2)
+
+        self.button3.setText(tmp+"°C\n \n"+state)
+
         self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
 
 
@@ -224,10 +220,12 @@ class MyApp(QWidget):
             self.noticehead.setText('인문사회과학캠퍼스')
             self.noticebody.setLayout(self.noticeSeoulbody)
             MyApp.campus = "Seoul"
-            f = open("init.txt", 'w')
-            if(self.isDelivery): f.write("Seoul\n" + self.delivery[0] + self.delivery[1])
-            else: f.write("Seoul")
+            f = open("init.txt", 'r')
+            lines = f.readlines()
             f.close()
+            f = open("init.txt", 'w')
+            f.write("Seoul\n" + lines[1] + lines[2])
+            f.close
             MyApp.showNotice(self)
 
     def radio2_clicked(self, enabled):
@@ -235,10 +233,12 @@ class MyApp(QWidget):
             self.noticehead.setText('자연과학캠퍼스')
             self.noticebody.setLayout(self.noticeSuwonbody)
             MyApp.campus = "Suwon"
-            f = open("init.txt", 'w')
-            if (self.isDelivery): f.write("Suwon\n" + self.delivery[0] + self.delivery[1])
-            else: f.write("Suwon")
+            f = open("init.txt", 'r')
+            lines = f.readlines()
             f.close()
+            f = open("init.txt", 'w')
+            f.write("Suwon\n" + lines[1] + lines[2])
+            f.close
             MyApp.showNotice(self)
 
 if __name__ == '__main__':
@@ -246,7 +246,7 @@ if __name__ == '__main__':
 
     dir = QDir("fonts")
     fontDB = QFontDatabase().addApplicationFont("fonts/testFont.ttf")
-    #print(QFontDatabase().applicationFontFamilies(fontDB))
+    print(QFontDatabase().applicationFontFamilies(fontDB))
     app.setFont(QFont("KBIZgo L"))
 
     ex = MyApp()

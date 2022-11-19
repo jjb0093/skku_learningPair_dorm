@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QPalette, QColor
 from PyQt5.QtCore import Qt, QSize
 from modules import delivery
 class Delivery(QWidget):
@@ -13,41 +13,55 @@ class Delivery(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        pal = QPalette()
+        pal.setColor(QPalette.Background, QColor(46, 78, 63))
+        self.setAutoFillBackground(True)
+        self.setPalette(pal)
 
     def initUI(self):
 
-        head = QLabel("택배 조회", self)
-        head.move(30, 20)
-        head.resize(200, 40)
+        head = QLabel("택배 조회")
         font1 = head.font()
         font1.setPointSize(25)
         font1.setBold(True)
         head.setFont(font1)
 
-        help = QLabel("택배사를 선택하고 운송장 번호를 입력하세요.", self)
-        help.move(30, 70)
-        help.resize(350, 30)
+        help = QLabel("택배사를 선택하고 운송장 번호를 입력하세요.")
 
-        self.cb = QComboBox(self)
+        self.cb = QComboBox()
         for i in range(len(Delivery.companyList)):
             self.cb.addItem(Delivery.companyList[i])
-        self.cb.move(30,110)
-        self.cb.resize(300,40)
-        self.qle2 = QLineEdit(self)
-        self.qle2.move(360, 110)
-        self.qle2.resize(300,40)
-        self.btn1 = QPushButton(self)
+        self.cb.setFixedWidth(300)
+        self.cb.setFixedHeight(40)
+
+        self.qle2 = QLineEdit()
+        self.qle2.setFixedWidth(300)
+        self.qle2.setFixedHeight(40)
+
+        self.btn1 = QPushButton()
         self.btn1.setText('조회')
-        self.btn1.move(690,110)
-        self.btn1.resize(80,40)
         self.btn1.setStyleSheet('QPushButton {background-color: #167023; color: white; border-radius: 3px;}')
+        self.btn1.setFixedWidth(80)
+        self.btn1.setFixedHeight(40)
         self.btn1.clicked.connect(self.btn1_clicked)
-        self.tb = QTextBrowser(self)
+
+        browser = QHBoxLayout()
+        browser.addWidget(self.cb)
+        browser.addWidget(self.qle2)
+        browser.addWidget(self.btn1)
+
+        self.tb = QTextBrowser()
         self.tb.setAcceptRichText(True)
         self.tb.setOpenExternalLinks(True)
-        self.tb.move(30,160)
-        self.tb.resize(740,400)
         self.tb.setStyleSheet('QTextBrowser {background-color: #FFFFFF; border-radius: 3px;}')
+
+        oklayout = QVBoxLayout()
+        oklayout.addWidget(head)
+        oklayout.addWidget(help)
+        oklayout.addLayout(browser)
+        oklayout.addWidget(self.tb)
+
+        self.setLayout(oklayout)
 
         self.setWindowTitle('POST')
         self.setGeometry(300, 300, 800, 600)

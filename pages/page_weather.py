@@ -10,6 +10,10 @@ class Weather(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        pal = QPalette()
+        pal.setColor(QPalette.Background, QColor(46, 78, 63))
+        self.setAutoFillBackground(True)
+        self.setPalette(pal)
 
     def initUI(self):
         f = open("init.txt", 'r')

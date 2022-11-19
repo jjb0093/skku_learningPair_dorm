@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QTextBrowser, QLabel, QAction, qApp, QPushButton
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon, QPalette, QColor
 from PyQt5.QtCore import Qt, QSize
 from modules import cafeteria
 
@@ -9,6 +9,10 @@ class Cafeteria(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        pal = QPalette()
+        pal.setColor(QPalette.Background, QColor(46, 78, 63))
+        self.setAutoFillBackground(True)
+        self.setPalette(pal)
 
     def initUI(self):
 
