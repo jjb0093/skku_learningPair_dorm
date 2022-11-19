@@ -26,7 +26,7 @@ class MyApp(QWidget):
         self.setAutoFillBackground(True)
         self.setPalette(pal)
         self.setStyleSheet('QLabel {color: white;}')
-        self.setStyleSheet('QRadioButton {color: white;}')
+
 
     def initUI(self):
 
@@ -110,7 +110,10 @@ class MyApp(QWidget):
         MyApp.showNotice(self)
 
         self.radio1 = QRadioButton('인사캠')
+        self.radio1.setStyleSheet('QRadioButton {color: white;}')
         self.radio2 = QRadioButton('자과캠')
+        self.radio2.setStyleSheet('QRadioButton {color: white;}')
+
         if(MyApp.campus == "Seoul"): self.radio1.setChecked(True)
         else: self.radio2.setChecked(True)
 
