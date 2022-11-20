@@ -1,7 +1,6 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QTextBrowser, QLabel, QAction, qApp, QPushButton,QVBoxLayout,QGridLayout,QHBoxLayout
-from PyQt5.QtGui import QPixmap, QIcon, QPalette, QColor
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QPalette, QColor
+from PyQt5.QtCore import Qt
 from modules import cafeteria
 
 class Cafeteria(QWidget):
@@ -23,9 +22,7 @@ class Cafeteria(QWidget):
         font0.setBold(True)
         todaysmeal.setFont(font0)
 
-
         epn = QLabel("오늘의 기숙사 학식을 확인하세요!")
-
 
         self.tb1 = QTextBrowser()
         self.tb1.setAcceptRichText(True)
@@ -100,7 +97,7 @@ class Cafeteria(QWidget):
         blank.addStretch(1)
 
         f = open("init.txt", 'r')
-        campus = f.readlines()[0].replace("\n", "")
+        campus = f.readline()
         result = cafeteria.getFood(campus)
         f.close()
 
@@ -116,14 +113,8 @@ class Cafeteria(QWidget):
             self.tb3.append("<span style='font-size: 20px; font-weight: 800'>" + list(food[2].keys())[i] + "</span>")
             self.tb3.append("<span style='font-size: 16px'>" + str(list(food[2].values())[i]).replace(',', "\n") + "</span><br>")
 
-
         self.setLayout(blank)
 
         self.setWindowTitle('FOOD')
         self.setGeometry(300, 300, 800, 600)
         self.show()
-
-def show():
-    app = QApplication(sys.argv)
-    ex = Cafeteria()
-    sys.exit(app.exec_())

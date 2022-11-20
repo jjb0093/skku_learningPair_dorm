@@ -3,6 +3,7 @@ import requests
 from datetime import date
 
 def getFood(loc):
+
     today = date.today().strftime("%Y-%m-%d")
 
     url_Seoul = "https://dorm.skku.edu/_custom/skku/_common/board/schedule_menu/food_menu_page.jsp?date=" + today + "&board_no=117&lng=ko#a"
@@ -14,7 +15,6 @@ def getFood(loc):
     foodList = soup.find_all('div', class_="board-foodlist-box")
 
     content = []
-
     for foodLists in foodList:
         list = {}
 
@@ -24,6 +24,5 @@ def getFood(loc):
             list[span[i].text] = p[i].text[12:]
 
         content.append(list)
-
 
     return content

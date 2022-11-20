@@ -66,13 +66,12 @@ def getWeather(loc):
 
         rotate_count += 1
 
-        if (nowHour == 23):
-            nowHour = 0
-        else:
-            nowHour += 1
+        if (nowHour == 23): nowHour = 0
+        else: nowHour += 1
         if (nowHour == 7 or nowHour == 16): plus_count += 1
 
         weatherDetails.append(details)
+    weatherDetails.append(baseDate + "-"  + baseTime)
 
     return weatherDetails
 
@@ -92,7 +91,7 @@ def getNowWeather(loc):
     baseTime = '2300'
     baseDate = (date.today() - timedelta(1)).strftime("%Y%m%d")
 
-    if (now.hour >= 2 and now.minute > 10):
+    if (now.hour >= 3):
         baseDate = now.strftime("%Y%m%d")
         if ((now.hour - 2) % 3 == 0):
             baseTime = str((now - timedelta(hours=3)).strftime("%H00"))
@@ -100,6 +99,7 @@ def getNowWeather(loc):
         else:
             baseTime = str((now - timedelta(hours=((now.hour - 2) % 3))).strftime("%H00"))
             pageNum = int((now.hour - 2) % 3)
+    else: pageNum = int(now.hour) + 1
 
     nowHour = now.hour
 
@@ -121,8 +121,8 @@ def getNowWeather(loc):
     details["dayTime"] = str(data[1][1][5][3].text) + '-' + str(data[1][1][5][4].text)
     details["sky"] = data[1][1][5][5].text
     details["tmp"] = data[1][1][0][5].text
-    details["reh"] = data[1][1][10][5].text
-    details["pop"] = data[1][1][7][5].text
+    #details["reh"] = data[1][1][10][5].text
+    #details["pop"] = data[1][1][7][5].text
     details["pty"] = data[1][1][6][5].text
 
     weatherDetails.append(details)

@@ -6,6 +6,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def getWeather(loc):
+
     now = datetime.now()
 
     serviceKey = "ya3j1ObxHL8p6TfZnHJZ9uGlUCexBZIbhJrzI%2FG9TYvVn3MwnQdL4j%2FROSg%2BJy2a4M%2F8etQYRfZMnqoeDPyjOw%3D%3D"
@@ -76,6 +77,7 @@ def getWeather(loc):
     return weatherDetails
 
 def getNowWeather(loc):
+
     now = datetime.now()
 
     serviceKey = "ya3j1ObxHL8p6TfZnHJZ9uGlUCexBZIbhJrzI%2FG9TYvVn3MwnQdL4j%2FROSg%2BJy2a4M%2F8etQYRfZMnqoeDPyjOw%3D%3D"

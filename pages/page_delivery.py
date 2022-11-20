@@ -1,15 +1,12 @@
-import sys
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap, QIcon, QPalette, QColor
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QPalette, QColor
 from modules import delivery
+
 class Delivery(QWidget):
-    f = open("init.txt", 'r')
-    lines = f.readlines()
-    campus = lines[0].replace("\n", "")
-    f.close()
+
     companyList = ['CJ 대한통운', '우체국택배', '한진택배', '롯데택배', '로젠택배', '경동택배', 'CVSnet 편의점택배(GS25)', 'CU 편의점택배']
     companyNum = ['04', '01', '05', '08', '06', '23', '24', '46']
+
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -20,7 +17,6 @@ class Delivery(QWidget):
         self.setStyleSheet('QLabel {color: white;}')
 
     def initUI(self):
-
         head = QLabel("택배 조회")
         font1 = head.font()
         font1.setPointSize(25)
@@ -78,6 +74,7 @@ class Delivery(QWidget):
         self.setWindowTitle('POST')
         self.setGeometry(300, 300, 800, 600)
         self.show()
+
     def btn1_clicked(self):
         index = Delivery.companyList.index(self.cb.currentText())
         result = delivery.getDelivery(Delivery.companyNum[index], self.qle2.text())
@@ -87,11 +84,3 @@ class Delivery(QWidget):
             for i in range(len(result[1])):
                 text = result[1][i]
                 self.tb.append("<p style='font-size: 20px'>" + str(text['timeString']) + " / " + str(text['trans_where']) + " / " + str(text['trans_kind']).replace("\n", "") + "</p>")
-            self.write(Delivery.companyNum[index], self.qle2.text())
-    def write(self, code, invoice):
-        print(code, invoice)
-        f = open("init.txt", 'w')
-        f.write(Delivery.campus + "\n" + code + "\n" + invoice)
-        f.close()
-def show():
-    app = QApplication(sys.argv)

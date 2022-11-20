@@ -15,7 +15,7 @@ class MyApp(QWidget):
         f.close()
     else:
         f = open("init.txt", 'r')
-        campus = f.readlines()[0].replace("\n","")
+        campus = f.readline()
         f.close()
 
     def __init__(self):
@@ -26,7 +26,6 @@ class MyApp(QWidget):
         self.setAutoFillBackground(True)
         self.setPalette(pal)
         self.setStyleSheet('QLabel {color: white;}')
-
 
     def initUI(self):
 
@@ -95,10 +94,10 @@ class MyApp(QWidget):
         gongji = QLabel("공지사항")
 
         self.noticeSeoulbody = QVBoxLayout()
-        self.noticeSeouldata = QTextBrowser() #여기에 서울 날씨 관련 자료 넣기
+        self.noticeSeouldata = QTextBrowser()
 
         self.noticeSuwonbody = QVBoxLayout()
-        self.noticeSuwondata = QTextBrowser() # 여기에 수원 날씨 관련 자료 넣기
+        self.noticeSuwondata = QTextBrowser()
 
         self.noticebody = QTextBrowser()
         self.noticebody.setStyleSheet('QTextBrowser {background-color: #FFFFFF; border-radius: 5px;}')
@@ -139,14 +138,6 @@ class MyApp(QWidget):
         self.setWindowTitle('Main')
         self.setGeometry(300, 100, 900, 700)
         self.show()
-
-    def fileCheck(self):
-        import os
-        if(not os.path.isfile("init.txt")):
-            self.campus = "Seoul"
-            f = open.file("init.txt", 'w')
-            f.write("Seoul")
-            f.close
 
     def openPage(self, page):
         from pages import page_delivery, page_weather, page_cafeteria
@@ -203,7 +194,6 @@ class MyApp(QWidget):
         sunpic = QPixmap('images/sun.png')
         sunpic = sunpic.scaled(500, 500, Qt.IgnoreAspectRatio)
 
-
         if (state == "맑음"): self.wthicon.addPixmap(sunpic)
         elif (state == "흐림" or state == "구름많음"): self.wthicon.addPixmap(cloudpic)
         elif (state == "비"): self.wthicon.addPixmap(rainpic)
@@ -217,7 +207,6 @@ class MyApp(QWidget):
         self.button3.setFont(font3)
 
         self.button3.setStyleSheet('QPushButton {background-color: #FFFFFF; color: black; border-radius: 5px;}')
-
 
     def radio1_clicked(self, enabled):
         if enabled:
@@ -243,14 +232,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     dir = QDir("fonts")
-    fontDB = QFontDatabase().addApplicationFont("fonts/testFont.ttf")
+    fontDB = QFontDatabase().addApplicationFont("fonts/KBIZgo_L.ttf")
     print(QFontDatabase().applicationFontFamilies(fontDB))
     app.setFont(QFont("KBIZgo L"))
 
-    ex = MyApp()
-    sys.exit(app.exec_())
-
-def show():
-    app = QApplication(sys.argv)
     ex = MyApp()
     sys.exit(app.exec_())

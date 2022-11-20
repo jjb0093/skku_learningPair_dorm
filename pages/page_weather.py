@@ -1,12 +1,10 @@
-import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import QDateTime, QSize, Qt
+from PyQt5.QtCore import QDateTime
 from modules import weather
 
 
 class Weather(QWidget):
-
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -18,7 +16,7 @@ class Weather(QWidget):
 
     def initUI(self):
         f = open("init.txt", 'r')
-        campus = f.readlines()[0].replace("\n", "")
+        campus = f.readline()
         result = weather.getWeather(campus)
         f.close()
 
@@ -60,7 +58,6 @@ class Weather(QWidget):
         for i in range(1, 4):
             for k in range(6):
                 tableWidget.setItem(i, k, QTableWidgetItem(str(list(result[k+1].values())[i+1])+signs[i-1]))
-
 
         grid = QGridLayout() # 온,습,강 나타내는 그리드
         nowweather = QLabel("현재 날씨: ")
@@ -132,8 +129,3 @@ class Weather(QWidget):
         self.setWindowTitle('Weather')
         self.setGeometry(300, 100, 800, 600)
         self.show()
-
-def show():
-    app = QApplication(sys.argv)
-    ex = Weather()
-    sys.exit(app.exec_())
